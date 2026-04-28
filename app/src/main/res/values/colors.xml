@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_cream">#F8F8F6</color>
+    <color name="bg_light_green">#EDF4EF</color>
+
+    <color name="sage_light">#7A9E82</color>
+    <color name="sage_mid">#5C7A62</color>
+    <color name="sage_dark">#3E5C44</color>
+
+    <color name="terra_light">#D4986A</color>
+    <color name="terra_mid">#B87333</color>
+    <color name="terra_dark">#8A5220</color>
+
+    <color name="text_dark">#1A1F1C</color>
+    <color name="text_mid">#4A5550</color>
+    <color name="text_light">#8A9590</color>
+    <color name="border_color">#E0E0E0</color>
+    <color name="border">#EEEEEE</color>
+
+    <color name="g30">#2E7D32</color>
+    <color name="g30b">#1B5E20</color>
+    <color name="g30ll">#E8F5E9</color>
+    <color name="a10ll">#FFF8E1</color>
+    <color name="n60">#F5F5F5</color>
 </resources>
