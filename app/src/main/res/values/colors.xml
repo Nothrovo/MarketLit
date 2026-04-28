@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="kicau_green">#3E5C44</color>
+    <color name="kicau_green_light">#EDF4EF</color>
+    <color name="kicau_amber">#B87333</color>
+    <color name="kicau_amber_light">#FAF0E4</color>
+    <color name="kicau_bg_gray">#F8F8F6</color>
+    <color name="text_dark">#1A1F1C</color>
+    <color name="text_mid">#4A5550</color>
+    <color name="text_light">#8A9590</color>
+    <color name="border_color">#E0E0E0</color>
+    <color name="white">#FFFFFF</color>
 </resources>
