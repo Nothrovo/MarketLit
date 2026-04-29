@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_cream">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/sage_dark"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profil Saya"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/bg_white"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="⚙️"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/circle_bg_transparent"
+                        android:gravity="center"
+                        android:text="👤"
+                        android:textSize="24sp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Anggas Lubang Hitam"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textColor="@color/bg_white"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kicau Mania · Peternak"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="#1AFFFFFF"
+                    android:padding="10dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="@color/bg_white" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Listing" android:textColor="#8CFFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:textColor="@color/bg_white" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:textColor="#8CFFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.9" android:textColor="@color/bg_white" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rating" android:textColor="#8CFFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🏆 Burung Andalan"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_color"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="8dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp" android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🦜" android:textSize="26sp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alit — Perkutut" android:fontFamily="@font/poppins_bold" android:textColor="@color/text_dark" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Juara 1 · Piala Gubernur 2024" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Juara 1" android:background="#FAF0E4" android:textColor="#8A5220" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:textSize="9sp" android:fontFamily="@font/poppins_bold"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎖 Sertifikat &amp; Prestasi"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_color"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp" android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="36dp" android:layout_height="36dp" android:background="#FAF0E4" android:gravity="center" android:text="🥇" android:textSize="18sp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piala Gubernur Jabar" android:fontFamily="@font/poppins_bold" android:textColor="@color/text_dark" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kelas Cucak Rowo Dewasa" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2024" android:textColor="@color/text_light" android:textSize="10sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_color"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/menuIklanSaya"
+                            android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical" android:clickable="true" android:focusable="true" android:background="?attr/selectableItemBackground">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋" android:textSize="15sp"/>
+                            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Iklan Saya" android:layout_marginStart="12dp" android:fontFamily="@font/poppins_bold" android:textColor="@color/text_dark" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="›" android:textColor="@color/text_light" android:textSize="18sp"/>
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border_color" android:layout_marginHorizontal="16dp"/>
+
+                        <LinearLayout
+                            android:id="@+id/menuRiwayatLomba"
+                            android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical" android:clickable="true" android:focusable="true" android:background="?attr/selectableItemBackground">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏆" android:textSize="15sp"/>
+                            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Riwayat Lomba" android:layout_marginStart="12dp" android:fontFamily="@font/poppins_bold" android:textColor="@color/text_dark" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="›" android:textColor="@color/text_light" android:textSize="18sp"/>
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border_color" android:layout_marginHorizontal="16dp"/>
+
+                        <LinearLayout
+                            android:id="@+id/menuPengaturan"
+                            android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical" android:clickable="true" android:focusable="true" android:background="?attr/selectableItemBackground">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="16sp"/>
+                            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Pengaturan Akun" android:layout_marginStart="12dp" android:fontFamily="@font/poppins_bold" android:textColor="@color/text_dark" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="›" android:textColor="@color/text_light" android:textSize="18sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:weightSum="5">
+
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beranda" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navLomba" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏆" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navMarket" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛍️" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Market" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navVet" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🩺" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dokter" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navProfil" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profil" android:fontFamily="@font/poppins_bold" android:textColor="@color/sage_dark" android:textSize="10sp"/>
+            <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
