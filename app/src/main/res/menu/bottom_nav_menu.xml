@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_beranda"
+        android:icon="@drawable/ic_home"
+        android:title="Beranda" />
+    <item
+        android:id="@+id/nav_lomba"
+        android:icon="@drawable/ic_lomba"
+        android:title="Lomba" />
+    <item
+        android:id="@+id/nav_market"
+        android:icon="@drawable/ic_market"
+        android:title="Market" />
+    <item
+        android:id="@+id/nav_dokter"
+        android:icon="@drawable/ic_doctor"
+        android:title="Dokter" />
+    <item
+        android:id="@+id/nav_profil"
+        android:icon="@drawable/ic_profile"
+        android:title="Profil" />
+</menu>
