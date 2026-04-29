@@ -1,6 +1,5 @@
 package com.app.foodorder.marketlit
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,51 +14,32 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Menghubungkan ke fragment_dashboard.xml
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ==========================================
-        // BINDING ID & LOGIKA BOTTOM NAVIGATION
-        // (Sesuai dengan desain navbar temen lo)
-        // ==========================================
+        // Cari ID menu yang tadi kita tambahkan di XML
+        val menuPasar = view.findViewById<LinearLayout>(R.id.menuPasar)
+        val menuLomba = view.findViewById<LinearLayout>(R.id.menuLomba)
+        val menuDokter = view.findViewById<LinearLayout>(R.id.menuDokter)
 
-        val navHome = view.findViewById<LinearLayout>(R.id.navHome)
-        val navLomba = view.findViewById<LinearLayout>(R.id.navLomba)
-        val navMarket = view.findViewById<LinearLayout>(R.id.navMarket)
-        val navVet = view.findViewById<LinearLayout>(R.id.navVet)
-        val navProfil = view.findViewById<LinearLayout>(R.id.navProfil)
-
-        // Klik Beranda (tetap di sini)
-        navHome.setOnClickListener {
-            Toast.makeText(requireContext(), "Anda di Beranda", Toast.LENGTH_SHORT).show()
+        // Kasih aksi pas ditekan
+        menuPasar.setOnClickListener {
+            Toast.makeText(requireContext(), "Menu Pasar dipencet!", Toast.LENGTH_SHORT).show()
+            // Logika pindah tab/activity nanti bisa ditaruh sini
         }
 
-        // Klik Profil (Pindah ke ProfilActivity punya temen lo)
-        navProfil.setOnClickListener {
-            val intent = Intent(requireContext(), ProfilActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
+        menuLomba.setOnClickListener {
+            Toast.makeText(requireContext(), "Menu Lomba dipencet!", Toast.LENGTH_SHORT).show()
         }
 
-        // Klik Lomba (Jika nanti sudah ada LombaActivity)
-        navLomba.setOnClickListener {
-            Toast.makeText(requireContext(), "Membuka Lomba...", Toast.LENGTH_SHORT).show()
-            // val intent = Intent(requireContext(), LombaActivity::class.java)
-            // startActivity(intent)
+        menuDokter.setOnClickListener {
+            Toast.makeText(requireContext(), "Menu Dokter dipencet!", Toast.LENGTH_SHORT).show()
         }
 
-        // Klik Market (Jika nanti sudah ada MarketActivity)
-        navMarket.setOnClickListener {
-            Toast.makeText(requireContext(), "Membuka Market...", Toast.LENGTH_SHORT).show()
-        }
-
-        // Klik Dokter
-        navVet.setOnClickListener {
-            Toast.makeText(requireContext(), "Membuka Dokter...", Toast.LENGTH_SHORT).show()
-        }
+        // Buat rvRekomendasi (RecyclerView) biarin dulu,
+        // nanti lu butuh Adapter khusus kalau mau diisi gambar-gambar burung/lomba.
     }
 }

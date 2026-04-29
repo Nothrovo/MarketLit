@@ -96,12 +96,107 @@
                     android:layout_height="wrap_content"
                     android:text="Kategori Pilihan"
                     android:fontFamily="@font/poppins_bold"
-                    android:textColor="@color/text_dark"
+                    android:textColor="#333333"
                     android:textSize="14sp"
                     android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginBottom="24dp"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:id="@+id/menuPasar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="12dp"
+                            android:src="@android:drawable/ic_menu_gallery" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Pasar Burung"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/menuLomba"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="12dp"
+                            android:src="@android:drawable/ic_menu_agenda" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Info Lomba"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/menuDokter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="12dp"
+                            android:src="@android:drawable/ic_menu_add" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Dokter Kicau"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rekomendasi Hari Ini"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRekomendasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>
