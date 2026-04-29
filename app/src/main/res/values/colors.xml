@@ -67,4 +67,11 @@
     <color name="bg_surface">#F8F8F6</color>
     <color name="white_80">#CCFFFFFF</color>
     <color name="white_55">#8CFFFFFF</color>
+    <color name="a10">#B87333</color>
+    <color name="a10d">#8A5220</color>
+
+    <color name="borderColor">#1C3C5A42</color>
+
+    <color name="textLight">#8A9590</color>
+
 </resources>

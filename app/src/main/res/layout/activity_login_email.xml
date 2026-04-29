@@ -124,14 +124,11 @@
                 <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="@color/border_color"/>
             </LinearLayout>
 
-            <!-- Bagian ini yang sudah dibersihkan dari conflict -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGoogle"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="54dp"
@@ -143,9 +140,7 @@
                     app:strokeColor="@color/border_color"
                     app:cornerRadius="12dp"
                     android:layout_marginEnd="6dp"/>
-
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnFacebook"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="54dp"
