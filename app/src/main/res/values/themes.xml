@@ -4,5 +4,14 @@
         <item name="android:navigationBarColor">@android:color/white</item>
     </style>
 
+    <!-- Style chip filter (Semua / Burung / Online / dst) -->
+    <style name="KicauFilterChip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/selector_chip_bg</item>
+        <item name="chipStrokeColor">@color/border</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="chipMinHeight">32dp</item>
+    </style>
+
     <style name="Theme.MarketLit" parent="Base.Theme.MarketLit" />
 </resources>

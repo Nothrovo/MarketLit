@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_jual.xml -->
+<!-- Halaman Form Pasang Iklan (muncul setelah tap FAB "Jual Sekarang") -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_surface">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_dark"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Tombol back -->
+            <ImageView
+                android:id="@+id/btnBackJual"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/white_80"
+                android:contentDescription="Kembali"
+                android:padding="2dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="Pasang Iklan"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <ImageView
+                android:id="@+id/btnHelpJual"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_help_outline"
+                android:tint="@color/white_80"
+                android:contentDescription="Bantuan" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Form Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="24dp"
+            android:gap="12dp">
+
+            <!-- Upload Foto -->
+            <LinearLayout
+                android:id="@+id/layoutUploadFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_upload_dashed"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp"
+                android:gap="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📷"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tambah Foto Burung"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_dark"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maks. 5 foto · JPG, PNG"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_light" />
+            </LinearLayout>
+
+            <!-- Nama Burung -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gap="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Burung / Produk"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_mid"
+                    android:fontFamily="sans-serif-medium" />
+
+                <EditText
+                    android:id="@+id/etNamaBurung"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Mis. Murai Batu Medan Gacor"
+                    android:textColorHint="@color/text_light"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_dark"
+                    android:paddingHorizontal="12dp"
+                    android:inputType="textCapWords" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gap="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gap="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kategori"
+                        android:textSize="11sp"
+                        android:textColor="@color/text_mid"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <Spinner
+                        android:id="@+id/spinnerKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_spinner"
+                        android:paddingHorizontal="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gap="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kondisi"
+                        android:textSize="11sp"
+                        android:textColor="@color/text_mid"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <Spinner
+                        android:id="@+id/spinnerKondisi"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_spinner"
+                        android:paddingHorizontal="12dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gap="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga (Rp)"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_mid"
+                    android:fontFamily="sans-serif-medium" />
+
+                <EditText
+                    android:id="@+id/etHarga"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="0"
+                    android:textColorHint="@color/text_light"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_dark"
+                    android:paddingHorizontal="12dp"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gap="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_mid"
+                    android:fontFamily="sans-serif-medium" />
+
+                <EditText
+                    android:id="@+id/etDeskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Ceritakan keunggulan burung kamu…"
+                    android:textColorHint="@color/text_light"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_dark"
+                    android:paddingHorizontal="12dp"
+                    android:paddingTop="12dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
+            </LinearLayout>
+
+            <!-- Tombol Submit -->
+            <Button
+                android:id="@+id/btnPasangIklan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Pasang Iklan Gratis"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:backgroundTint="@color/green_dark"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

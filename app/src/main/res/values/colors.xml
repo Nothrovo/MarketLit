@@ -56,4 +56,15 @@
     <color name="a10ll">#FFF8E1</color>
     <color name="n60">#F5F5F5</color>
 
+    <color name="green_dark">#3E5C44</color>
+    <color name="green_mid">#5C7A62</color>
+    <color name="green_light">#9DB8A2</color>
+    <color name="green_light_ll">#EDF4EF</color>
+    <color name="amber">#B87333</color>
+    <color name="amber_dark">#8A5220</color>
+    <color name="amber_light">#D4986A</color>
+    <color name="amber_light_ll">#FAF0E4</color>
+    <color name="bg_surface">#F8F8F6</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_55">#8CFFFFFF</color>
 </resources>
