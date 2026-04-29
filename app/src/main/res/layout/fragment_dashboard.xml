@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F6">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/sage_dark"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard Kicau"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="#1AFFFFFF"
+                    android:padding="15dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Listing" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.8" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rating" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginBottom="20dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_splash" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kategori Pilihan"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:weightSum="5">
+
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beranda" android:fontFamily="@font/poppins_bold" android:textColor="@color/sage_dark" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navLomba" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏆" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navMarket" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛍️" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Market" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navVet" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🩺" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dokter" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navProfil" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profil" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
