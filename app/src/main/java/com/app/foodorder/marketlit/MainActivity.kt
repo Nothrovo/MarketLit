@@ -3,22 +3,20 @@ package com.app.foodorder.marketlit
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.app.foodorder.marketlit.ui.MarketplaceFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
-        // Styling status bar
-        window.statusBarColor = Color.parseColor("#1B5E20")
+        // 1. Styling status bar biar sinkron sama Header Sage Dark temen lo (#3E5C44)
+        window.statusBarColor = Color.parseColor("#3E5C44")
 
-        // Load fragment pertama (biar gak double saat rotasi)
+        // 2. Load DashboardFragment lo (PASTIKAN NAMA CLASS-NYA BENER)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, MarketplaceFragment())
+                .replace(R.id.fragment_container, DashboardFragment())
                 .commit()
         }
     }

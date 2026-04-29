@@ -2,6 +2,7 @@ package com.app.foodorder.marketlit
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -17,6 +18,9 @@ class LoginEmailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_email)
 
+        // Biar status bar warna sage dark sesuai HTML
+        window.statusBarColor = Color.parseColor("#3E5C44")
+
         sharedPreferences = getSharedPreferences("USER_SESSION", MODE_PRIVATE)
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
@@ -30,19 +34,18 @@ class LoginEmailActivity : AppCompatActivity() {
 
         // Berhasil Login
         btnLogin.setOnClickListener {
-            // Logika verifikasi bisa ditaruh di sini nanti
             Toast.makeText(this, "Login Berhasil!", Toast.LENGTH_SHORT).show()
 
-            // ✅ Simpan status login
+            // Simpan status login
             val editor = sharedPreferences.edit()
             editor.putBoolean("isLoggedIn", true)
             editor.apply()
 
-            // Navigasi ke Dashboard
+            // PINDAH KE MAIN ACTIVITY (DASHBOARD)
             val intent = Intent(this, MainActivity::class.java)
+            // Flag ini penting biar setelah login, user gak bisa "back" ke halaman login lagi
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-
-            finish()
         }
 
         // Navigasi ke Daftar Gratis
@@ -50,11 +53,5 @@ class LoginEmailActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-        /*
-        findViewById<Button>(R.id.btnGoogle)?.setOnClickListener {
-            Toast.makeText(this, "Login Google dipilih", Toast.LENGTH_SHORT).show()
-        }
-        */
     }
 }

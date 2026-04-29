@@ -5,20 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/bg_cream">
 
-    <!-- HEADER -->
-    <LinearLayout
-        android:id="@+id/header_bar"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@color/primary_dark"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
 
-        <!-- (isi header lo biarin sama, gak gue ubah) -->
-
-    </LinearLayout>
-
-    <!-- BOTTOM NAV -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -30,14 +22,5 @@
         app:itemTextColor="@color/primary"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled" />
-
-    <!-- 🔥 INI YANG PENTING: CONTAINER FRAGMENT -->
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header_bar"
-        android:layout_above="@id/bottom_navigation"
-        android:layout_marginTop="-30dp" />
 
 </RelativeLayout>
