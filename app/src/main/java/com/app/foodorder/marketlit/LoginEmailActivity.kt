@@ -22,39 +22,54 @@ class LoginEmailActivity : AppCompatActivity() {
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val tvGoToRegister = findViewById<TextView>(R.id.tvGoToRegister)
+        val btnGoogle = findViewById<Button>(R.id.btnGoogle)
+        val btnFacebook = findViewById<Button>(R.id.btnFacebook)
 
-        // Tombol Kembali
+        // 1. Tombol Kembali (Arrow Kiri) -> Ke LandingActivity
         btnBack.setOnClickListener {
-            finish()
+            val intent = Intent(this, LandingActivity::class.java)
+            startActivity(intent)
+            finish() // Tutup halaman login ini
         }
 
-        // Berhasil Login
+        // 2. Berhasil Login Pakai Email -> Ke MainActivity
         btnLogin.setOnClickListener {
-            // Logika verifikasi bisa ditaruh di sini nanti
             Toast.makeText(this, "Login Berhasil!", Toast.LENGTH_SHORT).show()
 
-            // ✅ Simpan status login
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isLoggedIn", true)
-            editor.apply()
+            // Simpan status login
+            sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
 
             // Navigasi ke Dashboard
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
             finish()
         }
 
-        // Navigasi ke Daftar Gratis
+        // 3. Login Pakai Google -> Ke MainActivity
+        btnGoogle.setOnClickListener {
+            Toast.makeText(this, "Login Google Berhasil!", Toast.LENGTH_SHORT).show()
+            sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // 4. Login Pakai Facebook -> Ke MainActivity
+        btnFacebook.setOnClickListener {
+            Toast.makeText(this, "Login Facebook Berhasil!", Toast.LENGTH_SHORT).show()
+            sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // 5. Navigasi ke Daftar Gratis -> Ke RegisterActivity
         tvGoToRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+            finish() // Opsional: tutup login biar kalau user pencet back di Register, gak balik kesini (sesuai selera alurmu)
         }
-
-        /*
-        findViewById<Button>(R.id.btnGoogle)?.setOnClickListener {
-            Toast.makeText(this, "Login Google dipilih", Toast.LENGTH_SHORT).show()
-        }
-        */
     }
 }

@@ -33,40 +33,37 @@ class RegisterActivity : AppCompatActivity() {
                 val clicked = view as TextView
                 selectedRole = clicked.text.toString()
 
-                // Reset warna semua chip ke warna netral (Cream #F8F8F6)
+                // Reset warna semua chip ke warna netral (Background Cream, Teks Abu-abu)
                 roles.forEach {
-                    it.setBackgroundColor("#F8F8F6".toColorInt())
-                    it.setTextColor("#4A5550".toColorInt()) // text_mid
+                    it.setBackgroundColor("#F8F8F6".toColorInt()) // bg_cream
+                    it.setTextColor("#4A5550".toColorInt())       // text_mid
                 }
 
-                // Set warna chip yang diklik ke Hijau Muda (#EDF4EF)
-                clicked.setBackgroundColor("#EDF4EF".toColorInt())
-                clicked.setTextColor("#3E5C44".toColorInt()) // sage_dark
+                // Set warna chip yang diklik menjadi GELAP (Background Hijau Tua, Teks Putih)
+                clicked.setBackgroundColor("#3E5C44".toColorInt()) // sage_dark
+                clicked.setTextColor("#FFFFFF".toColorInt())       // bg_white
 
                 Toast.makeText(this, "Mendaftar sebagai $selectedRole", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Tombol Kembali
+        // Tombol Kembali (Arrow Kiri Atas) diarahkan eksplisit ke LoginEmailActivity
         btnBackReg.setOnClickListener {
-            finish()
-        }
-
-        // Berhasil Register
-        btnRegister.setOnClickListener {
-            // Menampilkan pesan sukses (opsional)
-            Toast.makeText(this, "Akun $selectedRole berhasil dibuat!", Toast.LENGTH_SHORT).show()
-
-            // Navigasi ke LoginEmailActivity
             val intent = Intent(this, LoginEmailActivity::class.java)
             startActivity(intent)
-
-            // finish() digunakan agar saat user menekan tombol 'Back' di HP,
-            // mereka tidak kembali lagi ke halaman registrasi yang sudah sukses.
             finish()
         }
 
-        // Navigasi balik ke Login
+        // Tombol Buat Akun diarahkan ke LoginEmailActivity
+        btnRegister.setOnClickListener {
+            Toast.makeText(this, "Akun $selectedRole berhasil dibuat!", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, LoginEmailActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // Teks "Masuk di sini" diarahkan ke LoginEmailActivity
         tvGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginEmailActivity::class.java)
             startActivity(intent)

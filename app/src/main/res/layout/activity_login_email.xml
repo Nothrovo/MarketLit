@@ -129,7 +129,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gap="12dp">
+
+                <!-- Tambahkan ID btnGoogle di sini -->
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogle"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="54dp"
@@ -141,7 +144,10 @@
                     app:strokeColor="@color/border_color"
                     app:cornerRadius="12dp"
                     android:layout_marginEnd="6dp"/>
+
+                <!-- Tambahkan ID btnFacebook di sini -->
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFacebook"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="54dp"
