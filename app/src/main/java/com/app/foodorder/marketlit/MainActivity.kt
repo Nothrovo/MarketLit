@@ -1,18 +1,25 @@
 package com.app.foodorder.marketlit
 
-import android.os.Bundle
 import android.graphics.Color
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.app.foodorder.marketlit.ui.MarketplaceFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Kita matikan fitur EdgeToEdge bawaan template biar aplikasi
-        // gak dipaksa "nyelip" ke bawah tombol navigasi HP Xiaomi lo.
         setContentView(R.layout.activity_main)
 
-        // Bikin barisan jam/baterai tetep hijau tua biar ganteng
+        // Styling status bar
         window.statusBarColor = Color.parseColor("#1B5E20")
+
+        // Load fragment pertama (biar gak double saat rotasi)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MarketplaceFragment())
+                .commit()
+        }
     }
 }
