@@ -1,15 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
+    <!-- Base -->
     <color name="white">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- Background -->
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_cream">#F8F8F6</color>
+    <color name="bg_light_green">#EDF4EF</color>
+
+    <!-- Primary (Green) -->
+    <color name="primary_light">#7A9E82</color>
+    <color name="primary">#5C7A62</color>
+    <color name="primary_dark">#3E5C44</color>
+
+    <!-- Accent (Amber) -->
+    <color name="accent_light">#D4986A</color>
+    <color name="accent">#B87333</color>
+    <color name="accent_dark">#8A5220</color>
+
+    <!-- Text -->
+    <color name="text_dark">#1A1F1C</color>
+    <color name="text_mid">#4A5550</color>
+    <color name="text_light">#8A9590</color>
+
+    <!-- Border -->
+    <color name="border_color">#E0E0E0</color>
+    <color name="border">#EEEEEE</color>
+
+    <!-- Backward compatibility -->
+    <color name="colorPrimary">#5C7A62</color>
+    <color name="colorPrimaryDark">#3E5C44</color>
+    <color name="colorAccent">#B87333</color>
+    <color name="textDark">#1A1F1C</color>
+    <color name="bgLight">#F8F8F6</color>
+
+    <!-- Legacy naming (biar branch lain tetap jalan) -->
+    <color name="sage_light">#7A9E82</color>
+    <color name="sage_mid">#5C7A62</color>
+    <color name="sage_dark">#3E5C44</color>
+
+    <color name="terra_light">#D4986A</color>
+    <color name="terra_mid">#B87333</color>
+    <color name="terra_dark">#8A5220</color>
+
     <color name="kicau_bg_light">#F8F8F6</color>
     <color name="kicau_bg_chip">#EDF4EF</color>
-
-    <color name="kicau_green_sage">#7A9E82</color>
     <color name="kicau_green_mid">#5C7A62</color>
-    <color name="kicau_green_dark">#3E5C44</color>
-
-    <color name="kicau_amber_light">#D4986A</color>
     <color name="kicau_amber_main">#B87333</color>
-    <color name="kicau_amber_dark">#8A5220</color>
+
+    <!-- Extra palette (dipakai di feature branch) -->
+    <color name="g30">#2E7D32</color>
+    <color name="g30b">#1B5E20</color>
+    <color name="g30ll">#E8F5E9</color>
+    <color name="a10ll">#FFF8E1</color>
+    <color name="n60">#F5F5F5</color>
+
 </resources>

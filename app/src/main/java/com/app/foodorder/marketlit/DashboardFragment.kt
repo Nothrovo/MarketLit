@@ -8,20 +8,23 @@ import androidx.fragment.app.Fragment
 
 class DashboardFragment : Fragment() {
 
-    // Fungsi ini gunanya buat "memasang" layout XML ke dalam Fragment
+    // 1. Fungsi ini untuk memanggil layout fragment_dashboard.xml
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Hubungkan dengan file fragment_dashboard.xml yang kita buat tadi
+        // Inflate layout untuk fragment ini
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
+    // 2. Fungsi ini tempat lo naruh logika (klik tombol, ambil data, dll)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Kalau lo mau bikin tombol klik atau logic lainnya,
-        // kodenya taruh di sini (mirip onCreate di Activity)
+        // Contoh kalau nanti lo mau bikin klik di foto profil:
+        // val profileCard = view.findViewById<View>(R.id.profile_card)
+        // profileCard.setOnClickListener {
+        //     // Aksi saat foto profil diklik
+        // }
     }
 }
