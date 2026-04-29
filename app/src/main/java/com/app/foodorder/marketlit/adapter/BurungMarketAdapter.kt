@@ -21,7 +21,7 @@ class BurungMarketAdapter(
     private val rupiahFormat = NumberFormat.getNumberInstance(Locale("id", "ID"))
 
     inner class BurungViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val card: CardView       = itemView.findViewById(R.id.cardBurung) // root CardView
+        val card: CardView       = itemView.findViewById(R.id.cardBurung) // r`oot CardView
         val viewImgBg: View      = itemView.findViewById(R.id.viewImgBg)
         val tvEmoji: TextView    = itemView.findViewById(R.id.tvBirdEmoji)
         val tvBadge: TextView    = itemView.findViewById(R.id.tvBadge)
