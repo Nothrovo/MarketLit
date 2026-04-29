@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.app.foodorder.marketlit.ui.MarketplaceFragment"
+        android:label="Market"
+        tools:layout="@layout/fragment_marketplace">
+
+        <action
+            android:id="@+id/action_market_to_jual"
+            app:destination="@id/jualFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/jualFragment"
+        android:name="com.kicaumart.app.ui.market.JualFragment"
+        android:label="Pasang Iklan"
+        tools:layout="@layout/fragment_jual" />
+
+    <fragment
+        android:id="@+id/dokterFragment"
+        android:name="com.kicaumart.app.ui.dokter.DokterFragment"
+        android:label="Dokter Burung"
+        tools:layout="@layout/fragment_dokter" />
+</navigation>

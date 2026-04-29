@@ -19,6 +19,8 @@ import com.app.foodorder.marketlit.model.BurungItem
 
 class MarketplaceFragment : Fragment() {
 
+
+
     private lateinit var adapter: BurungMarketAdapter
     private lateinit var rvMarket: RecyclerView
     private lateinit var tvJumlah: TextView
