@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.app.foodorder.marketlit.profil.ProfilFragment
+import com.app.foodorder.marketlit.ui.MarketplaceFragment
+
 // Pastikan fragment-fragment lu ter-import di sini ya
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         // 2. Kasih perintah klik (OnClickListener) untuk ganti Fragment
         navHome.setOnClickListener {
-            // loadFragment(HomeFragment()) // Buka komen (hapus //) kalau file-nya udah lu/temen lu bikin
+            loadFragment(DashboardFragment()) // Buka komen (hapus //) kalau file-nya udah lu/temen lu bikin
         }
 
         navLomba.setOnClickListener {
@@ -44,15 +47,15 @@ class MainActivity : AppCompatActivity() {
 
         navMarket.setOnClickListener {
             // Contoh kalau temen lu udah bikin MarketplaceFragment:
-            // loadFragment(MarketplaceFragment())
+            loadFragment(MarketplaceFragment())
         }
 
         navVet.setOnClickListener {
-            // loadFragment(VetFragment())
+            loadFragment(DokterFragment())
         }
 
         navProfil.setOnClickListener {
-            // loadFragment(ProfilFragment())
+            loadFragment(ProfilFragment())
         }
     }
 

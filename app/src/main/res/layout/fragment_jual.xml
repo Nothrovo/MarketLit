@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- fragment_jual.xml -->
-<!-- Halaman Form Pasang Iklan (muncul setelah tap FAB "Jual Sekarang") -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,7 +23,6 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Tombol back -->
             <ImageView
                 android:id="@+id/btnBackJual"
                 android:layout_width="24dp"
@@ -52,6 +49,7 @@
                 android:src="@drawable/ic_help_outline"
                 android:tint="@color/white_80"
                 android:contentDescription="Bantuan" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -62,16 +60,17 @@
         android:layout_weight="1"
         android:fillViewport="true">
 
+        <!-- ✅ Fix 1: Tutup tag > bukan langsung tutup, hapus android:gap -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="14dp"
             android:paddingTop="14dp"
-            android:paddingBottom="24dp"
-            android:gap="12dp">
+            android:paddingBottom="24dp">
 
             <!-- Upload Foto -->
+            <!-- ✅ Fix 2: Tag LinearLayout ditutup dengan > bukan /> -->
             <LinearLayout
                 android:id="@+id/layoutUploadFoto"
                 android:layout_width="match_parent"
@@ -80,7 +79,7 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="20dp"
-                android:gap="6dp">
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,14 +101,16 @@
                     android:text="Maks. 5 foto · JPG, PNG"
                     android:textSize="11sp"
                     android:textColor="@color/text_light" />
+
             </LinearLayout>
 
             <!-- Nama Burung -->
+            <!-- ✅ Fix 3: Hapus /> di tengah tag LinearLayout yang punya child -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gap="5dp">
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,20 +131,23 @@
                     android:textColor="@color/text_dark"
                     android:paddingHorizontal="12dp"
                     android:inputType="textCapWords" />
+
             </LinearLayout>
 
+            <!-- Kategori + Kondisi (2 kolom) -->
+            <!-- ✅ Fix 4: Hapus /> di LinearLayout horizontal yang punya child -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gap="8dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gap="5dp">
+                    android:layout_marginEnd="6dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -159,6 +163,7 @@
                         android:layout_height="44dp"
                         android:background="@drawable/bg_spinner"
                         android:paddingHorizontal="12dp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -166,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gap="5dp">
+                    android:layout_marginStart="6dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,14 +187,17 @@
                         android:layout_height="44dp"
                         android:background="@drawable/bg_spinner"
                         android:paddingHorizontal="12dp" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
+            <!-- Harga -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gap="5dp">
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -210,13 +218,15 @@
                     android:textColor="@color/text_dark"
                     android:paddingHorizontal="12dp"
                     android:inputType="numberDecimal" />
+
             </LinearLayout>
 
+            <!-- Deskripsi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gap="5dp">
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -240,6 +250,7 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:minLines="3" />
+
             </LinearLayout>
 
             <!-- Tombol Submit -->
@@ -256,4 +267,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>

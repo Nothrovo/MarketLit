@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- item_market_product.xml -->
-<!-- Card produk 2-kolom di tab Market -->
+<!-- res/layout/item_burung_card.xml -->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardBurung"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -17,32 +16,29 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Gambar produk / placeholder emoji -->
+        <!-- Area gambar / emoji -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/green_light_ll">
+            android:layout_height="100dp">
 
-            <!-- Gambar nyata (load via Glide/Coil) -->
-            <ImageView
-                android:id="@+id/imgProduct"
+            <!-- Background warna (di-set via kode) -->
+            <View
+                android:id="@+id/viewImgBg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:contentDescription="Foto produk" />
+                android:layout_height="match_parent" />
 
-            <!-- Emoji fallback, sembunyikan kalau ada gambar -->
+            <!-- Emoji burung -->
             <TextView
-                android:id="@+id/tvProductEmoji"
+                android:id="@+id/tvBirdEmoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="40sp"
                 android:text="🐦" />
 
-            <!-- Badge kategori kiri atas -->
+            <!-- Badge kondisi (kiri atas) -->
             <TextView
-                android:id="@+id/tvBadgeKategori"
+                android:id="@+id/tvBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"
@@ -50,34 +46,43 @@
                 android:paddingHorizontal="6dp"
                 android:paddingVertical="2dp"
                 android:background="@drawable/bg_badge_green"
-                android:text="Burung"
+                android:text="Anakan"
                 android:textColor="@android:color/white"
                 android:textSize="8sp"
                 android:fontFamily="sans-serif-medium" />
 
-            <!-- Favorit icon kanan atas -->
-            <ImageView
-                android:id="@+id/btnFavorit"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="top|end"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_heart_outline"
-                android:contentDescription="Favorit" />
+            <!-- Overlay terjual (sembunyikan default) -->
+            <View
+                android:id="@+id/overlayTerjual"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#99000000"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTerjual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="TERJUAL"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-bold"
+                android:visibility="gone" />
+
         </FrameLayout>
 
-        <!-- Info produk -->
+        <!-- Info teks -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="10dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:gap="2dp">
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/tvProductName"
+                android:id="@+id/tvNamaBurung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Murai Batu Medan"
@@ -88,7 +93,7 @@
                 android:ellipsize="end" />
 
             <TextView
-                android:id="@+id/tvProductLokasi"
+                android:id="@+id/tvLokasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="📍 Medan, SU"
@@ -96,13 +101,14 @@
                 android:textColor="@color/text_light" />
 
             <TextView
-                android:id="@+id/tvProductHarga"
+                android:id="@+id/tvHarga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rp 3.500.000"
                 android:textSize="12sp"
                 android:textColor="@color/green_dark"
                 android:fontFamily="sans-serif-medium" />
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

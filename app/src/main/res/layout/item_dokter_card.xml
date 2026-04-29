@@ -17,14 +17,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:gravity="center_vertical"
-        android:gap="12dp">
+        android:gravity="center_vertical">
 
         <!-- Avatar dokter -->
         <ImageView
             android:id="@+id/imgDokterAvatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="12dp"
             android:src="@drawable/ic_doctor_placeholder"
             android:background="@drawable/bg_avatar_green"
             android:scaleType="centerCrop"
@@ -35,8 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gap="2dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvDokterNama"
@@ -69,8 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="end|center_vertical"
-            android:gap="6dp">
+            android:gravity="end|center_vertical">
 
             <!-- Status Online / Sibuk -->
             <TextView
@@ -83,6 +81,7 @@
                 android:background="@drawable/bg_badge_status_online"
                 android:paddingHorizontal="7dp"
                 android:paddingVertical="2dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium" />
 
             <!-- Tombol Chat / Jadwal -->
