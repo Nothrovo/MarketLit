@@ -109,6 +109,13 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <!-- KONTEN SCROLL (Mengisi seluruh area di bawah search bar) -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

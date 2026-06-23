@@ -9,11 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.ProgressBar
-import android.widget.Toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 class LombaFragment : Fragment() {
 
     private lateinit var adapter: LombaAdapter
@@ -23,9 +19,41 @@ class LombaFragment : Fragment() {
     private lateinit var chipDibuka: TextView
     private lateinit var chipSegera: TextView
     private lateinit var chipSelesai: TextView
-    private lateinit var progressBar: ProgressBar
 
-    private var allLomba: List<Lomba> = emptyList()
+    private val allLomba = listOf(
+        Lomba(
+            1, "🏆 Kicau Mania Cup 2025",
+            "📅 20 Mei 2025 · Surabaya",
+            "🐦 Murai Batu, Kacer",
+            "Dibuka",
+            "Rp 50.000.000",
+            "Lomba bergengsi tahunan untuk para Kicau Mania. Siapkan burung jagoanmu! Hadiah total mencapai 50 juta rupiah dengan kategori Murai Batu dan Kacer kelas dunia."
+        ),
+        Lomba(
+            2, "🎵 Festival Kicau Nusantara",
+            "📅 15 Juni 2025 · Jakarta",
+            "🐦 Semua kategori",
+            "Dibuka",
+            "Rp 80.000.000",
+            "Festival kicau terbesar di Nusantara dengan juri profesional dan hadiah fantastis. Terbuka untuk semua jenis burung kicau dengan total hadiah 80 juta rupiah."
+        ),
+        Lomba(
+            3, "🏅 Latber Spesial Minggu",
+            "📅 10 Mei 2025 · Bandung",
+            "🐦 Kenari, Lovebird",
+            "Segera",
+            "Rp 5.000.000",
+            "Latihan bersama spesial hari minggu untuk melatih mental tanding burung. Cocok untuk pemula maupun senior. Pendaftaran ditutup 3 hari sebelum acara."
+        ),
+        Lomba(
+            4, "🎖️ Piala Gubernur 2024",
+            "📅 1 Des 2024 · Jogja",
+            "🐦 Cucak Rowo",
+            "Selesai",
+            "Rp 100.000.000",
+            "Lomba bergengsi berhadiah 100 juta rupiah yang telah berhasil diselenggarakan. Terima kasih kepada semua peserta yang telah ikut berpartisipasi dalam Piala Gubernur 2024."
+        )
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +62,6 @@ class LombaFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_lomba, container, false)
 
         rvLomba = view.findViewById(R.id.rvLomba)
-        progressBar = view.findViewById(R.id.progressBar)
         rvLomba.layoutManager = LinearLayoutManager(context)
 
         chipSemua   = view.findViewById(R.id.chipSemua)
@@ -49,31 +76,8 @@ class LombaFragment : Fragment() {
 
         setupChipListeners()
         setActiveChip(chipSemua)
-        fetchLombaFromApi()
 
         return view
-    }
-
-    private fun fetchLombaFromApi() {
-        progressBar.visibility = View.VISIBLE
-
-        RetrofitClient.instance.getLatestLomba().enqueue(object : Callback<List<Lomba>> {
-            override fun onResponse(call: Call<List<Lomba>>, response: Response<List<Lomba>>) {
-                progressBar.visibility = View.GONE
-                android.util.Log.d("LombaAPI", "Code: ${response.code()}, Body: ${response.body()}")
-                if (response.isSuccessful && response.body() != null) {
-                    allLomba = response.body()!!
-                    android.util.Log.d("LombaAPI", "Jumlah data: ${allLomba.size}")
-                    adapter.updateData(allLomba)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Lomba>>, t: Throwable) {
-                progressBar.visibility = View.GONE
-                android.util.Log.e("LombaAPI", "Error: ${t.message}")
-                Toast.makeText(requireContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun setupChipListeners() {

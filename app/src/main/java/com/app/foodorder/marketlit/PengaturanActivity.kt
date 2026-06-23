@@ -8,10 +8,13 @@ import android.widget.Spinner
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.app.foodorder.marketlit.db.MarketLitRepository
+import com.app.foodorder.marketlit.model.User
 
 class PengaturanActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
+    private lateinit var repository: MarketLitRepository
 
     private lateinit var etNama: EditText
     private lateinit var etEmail: EditText
@@ -22,14 +25,17 @@ class PengaturanActivity : AppCompatActivity() {
     private lateinit var btnSimpan: Button
     private lateinit var btnBackPengaturan: Button
 
+    private var userId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pengaturan)
 
         prefs = getSharedPreferences("USER_PROFILE", MODE_PRIVATE)
+        repository = MarketLitRepository(this)
+        userId = getSharedPreferences("USER_SESSION", MODE_PRIVATE).getInt("USER_ID", 0)
 
-        // Bind views
         etNama         = findViewById(R.id.etNama)
         etEmail        = findViewById(R.id.etEmail)
         etHp           = findViewById(R.id.etHp)
@@ -39,7 +45,6 @@ class PengaturanActivity : AppCompatActivity() {
         btnSimpan      = findViewById(R.id.btnSimpan)
         btnBackPengaturan = findViewById(R.id.btnBackPengaturan)
 
-        // Setup theme spinner
         val temaOptions = listOf("Default (Ikut HP)", "Light Mode", "Dark Mode")
         val temaAdapter = ArrayAdapter(
             this,
@@ -49,13 +54,10 @@ class PengaturanActivity : AppCompatActivity() {
         spinnerTema.adapter = temaAdapter
         spinnerTema.setSelection(prefs.getInt("THEME_MODE", 0))
 
-        // Load data dari SharedPreferences ke form
         loadData()
 
-        // Tombol back → finish
         btnBackPengaturan.setOnClickListener { finish() }
 
-        // Tombol simpan → save ke prefs → Toast → finish
         btnSimpan.setOnClickListener {
             saveData()
             Toast.makeText(this, "Profil berhasil diperbarui!", Toast.LENGTH_SHORT).show()
@@ -64,6 +66,17 @@ class PengaturanActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
+        if (userId > 0) {
+            val user = repository.getUserById(userId)
+            if (user != null) {
+                etNama.setText(user.nama)
+                etEmail.setText(user.email)
+                etHp.setText(user.phone)
+                etLokasi.setText(user.lokasi)
+                etJenisBurung.setText(user.jenisBurungAndalan)
+                return
+            }
+        }
         etNama.setText(prefs.getString("USER_NAME", ""))
         etEmail.setText(prefs.getString("USER_EMAIL", ""))
         etHp.setText(prefs.getString("USER_HP", ""))
@@ -72,16 +85,35 @@ class PengaturanActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
+        val nama = etNama.text.toString().trim()
+        val email = etEmail.text.toString().trim()
+        val hp = etHp.text.toString().trim()
+        val lokasi = etLokasi.text.toString().trim()
+        val burung = etJenisBurung.text.toString().trim()
+
         prefs.edit()
-            .putString("USER_NAME",    etNama.text.toString().trim())
-            .putString("USER_EMAIL",   etEmail.text.toString().trim())
-            .putString("USER_HP",      etHp.text.toString().trim())
-            .putString("USER_LOKASI",  etLokasi.text.toString().trim())
-            .putString("USER_BURUNG",  etJenisBurung.text.toString().trim())
-            .putInt("THEME_MODE",      spinnerTema.selectedItemPosition)
+            .putString("USER_NAME", nama)
+            .putString("USER_EMAIL", email)
+            .putString("USER_HP", hp)
+            .putString("USER_LOKASI", lokasi)
+            .putString("USER_BURUNG", burung)
+            .putInt("THEME_MODE", spinnerTema.selectedItemPosition)
             .apply()
 
-        // Terapkan perubahan tema secara langsung
+        if (userId > 0) {
+            val currentUser = repository.getUserById(userId)
+            if (currentUser != null) {
+                val updatedUser = currentUser.copy(
+                    nama = nama,
+                    email = email,
+                    phone = hp,
+                    lokasi = lokasi,
+                    jenisBurungAndalan = burung
+                )
+                repository.updateUser(updatedUser)
+            }
+        }
+
         ThemeHelper.applyTheme(this)
     }
 }

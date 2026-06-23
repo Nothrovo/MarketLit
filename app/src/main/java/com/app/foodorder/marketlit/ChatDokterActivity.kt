@@ -1,4 +1,3 @@
-// ChatDokterActivity.kt
 package com.app.foodorder.marketlit
 
 import android.graphics.Color
@@ -13,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.foodorder.marketlit.databinding.ActivityChatDokterBinding
+import com.app.foodorder.marketlit.db.MarketLitRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,10 +22,12 @@ class ChatDokterActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private val chatMessages = ArrayList<ChatMessage>()
     private val handler = Handler(Looper.getMainLooper())
+    private lateinit var repository: MarketLitRepository
 
     private var chatType = "DOKTER"
+    private var currentUserId = 0
+    private var receiverUserId = 0
 
-    // ── Balasan auto dokter ───────────────────────────────────────────────────
     private val autoReplies = listOf(
         "Baik, saya mengerti kondisi burung Anda.",
         "Apa gejala yang terlihat?",
@@ -36,7 +38,6 @@ class ChatDokterActivity : AppCompatActivity() {
         "Pastikan kandang bersih dan ventilasi cukup baik."
     )
 
-    // ── Balasan auto peternak ─────────────────────────────────────────────────
     private val breederAutoReplies = listOf(
         "Burung tersebut dalam kondisi sehat dan rajin berkicau.",
         "Stok burung kami selalu terawat dengan pakan pilihan.",
@@ -52,18 +53,30 @@ class ChatDokterActivity : AppCompatActivity() {
         binding = ActivityChatDokterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ── Ambil data dokter dari Intent ─────────────────────────────────────
+        repository = MarketLitRepository(this)
+        currentUserId = getSharedPreferences("USER_SESSION", MODE_PRIVATE).getInt("USER_ID", 1)
+
         val dokterNama      = intent.getStringExtra("DOKTER_NAMA")      ?: "Dokter"
         val dokterSpesialis = intent.getStringExtra("DOKTER_SPESIALIS") ?: ""
         val dokterStatus    = intent.getStringExtra("DOKTER_STATUS")     ?: "ONLINE"
         val dokterEmoji     = intent.getStringExtra("DOKTER_EMOJI")      ?: "👨‍⚕️"
         chatType = intent.getStringExtra("CHAT_TYPE") ?: "DOKTER"
+        receiverUserId = intent.getIntExtra("RECEIVER_USER_ID", 0)
 
         setupHeader(dokterNama, dokterStatus, dokterEmoji)
         setupRecyclerView()
         setupSendButton()
 
-        // ── Pesan awal (hardcoded, delay per pesan) ───────────────
+        if (receiverUserId > 0 && currentUserId > 0) {
+            val savedMessages = repository.getChatMessages(currentUserId, receiverUserId)
+            if (savedMessages.isNotEmpty()) {
+                chatMessages.addAll(savedMessages)
+                chatAdapter.notifyDataSetChanged()
+                binding.rvChat.scrollToPosition(chatMessages.size - 1)
+                return
+            }
+        }
+
         if (chatType == "PETERNAK") {
             sendDokterMessageDelayed("Halo! Saya ${dokterNama} dari ${dokterSpesialis}. 👋", 500)
             sendDokterMessageDelayed("Selamat datang di toko kami. Ada burung atau perlengkapan yang ingin Anda tanyakan?", 1300)
@@ -75,7 +88,6 @@ class ChatDokterActivity : AppCompatActivity() {
         }
     }
 
-    // ── Header topbar ─────────────────────────────────────────────────────────
     private fun setupHeader(nama: String, status: String, emoji: String) {
         binding.tvNamaDokterChat.text = nama
         binding.tvAvatarChat.text     = emoji
@@ -91,7 +103,6 @@ class ChatDokterActivity : AppCompatActivity() {
         binding.btnBackChat.setOnClickListener { finish() }
     }
 
-    // ── RecyclerView bubble chat ──────────────────────────────────────────────
     private fun setupRecyclerView() {
         chatAdapter = ChatAdapter(chatMessages)
         binding.rvChat.apply {
@@ -102,28 +113,38 @@ class ChatDokterActivity : AppCompatActivity() {
         }
     }
 
-    // ── Kirim pesan user ──────────────────────────────────────────────────────
     private fun setupSendButton() {
         binding.btnKirim.setOnClickListener {
             val teks = binding.etPesan.text.toString().trim()
             if (teks.isEmpty()) return@setOnClickListener
 
-            addMessage(ChatMessage(teks, isUser = true))
+            val msg = ChatMessage(teks, isUser = true)
+            addMessage(msg)
+            saveChatToDb(teks, currentUserId, receiverUserId)
             binding.etPesan.setText("")
 
-            // Auto-reply dengan delay acak 1–2 detik
             val delay = (1000..2000L).random()
             handler.postDelayed({
                 val replies = if (chatType == "PETERNAK") breederAutoReplies else autoReplies
                 val reply = replies.random()
-                addMessage(ChatMessage(reply, isUser = false))
+                val replyMsg = ChatMessage(reply, isUser = false)
+                addMessage(replyMsg)
+                saveChatToDb(reply, receiverUserId, currentUserId)
             }, delay)
+        }
+    }
+
+    private fun saveChatToDb(teks: String, senderId: Int, receiverId: Int) {
+        if (senderId > 0 && receiverId > 0) {
+            val waktu = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+            repository.insertChatMessage(senderId, receiverId, teks, waktu)
         }
     }
 
     private fun sendDokterMessageDelayed(teks: String, delayMs: Long) {
         handler.postDelayed({
             addMessage(ChatMessage(teks, isUser = false))
+            saveChatToDb(teks, receiverUserId, currentUserId)
         }, delayMs)
     }
 
@@ -139,14 +160,16 @@ class ChatDokterActivity : AppCompatActivity() {
     }
 }
 
-// ── Data class pesan chat ─────────────────────────────────────────────────────
 data class ChatMessage(
     val teks: String,
     val isUser: Boolean,
-    val waktu: String = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+    val waktu: String = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date()),
+    val id: Int = 0,
+    val senderId: Int = 0,
+    val receiverId: Int = 0,
+    val isRead: Boolean = false
 )
 
-// ── Adapter bubble chat ───────────────────────────────────────────────────────
 class ChatAdapter(
     private val messages: List<ChatMessage>
 ) : RecyclerView.Adapter<ChatAdapter.BubbleViewHolder>() {

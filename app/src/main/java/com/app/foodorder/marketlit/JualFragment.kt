@@ -1,4 +1,3 @@
-// JualFragment.kt
 package com.app.foodorder.marketlit
 
 import android.app.Activity
@@ -11,14 +10,16 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.app.foodorder.marketlit.databinding.FragmentJualBinding
+import com.app.foodorder.marketlit.db.MarketLitRepository
+import com.app.foodorder.marketlit.model.BurungItem
 import com.app.foodorder.marketlit.ui.MarketplaceFragment
 
 class JualFragment : Fragment() {
 
     private var _binding: FragmentJualBinding? = null
     private val binding get() = _binding!!
+    private lateinit var repository: MarketLitRepository
 
-    // Request code untuk image picker
     companion object {
         private const val REQUEST_IMAGE_PICK = 1001
     }
@@ -34,6 +35,7 @@ class JualFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        repository = MarketLitRepository(requireContext())
 
         setupTopBar()
         setupSpinners()
@@ -41,16 +43,13 @@ class JualFragment : Fragment() {
         setupSubmit()
     }
 
-    // ── Tombol back di top bar ────────────────────────────────────────────────
     private fun setupTopBar() {
         binding.btnBackJual.setOnClickListener {
             (activity as? MainActivity)?.loadFragment(MarketplaceFragment())
         }
     }
 
-    // ── Spinner Kategori & Kondisi ────────────────────────────────────────────
     private fun setupSpinners() {
-        // Kategori
         val kategoriOptions = listOf("Pilih Kategori", "Burung", "Kandang", "Pakan", "Perlengkapan", "Peternak")
         val kategoriAdapter = ArrayAdapter(
             requireContext(),
@@ -59,7 +58,6 @@ class JualFragment : Fragment() {
         ).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         binding.spinnerKategori.adapter = kategoriAdapter
 
-        // Kondisi
         val kondisiOptions = listOf("Pilih Kondisi", "Baru", "Bekas", "Jantan", "Betina")
         val kondisiAdapter = ArrayAdapter(
             requireContext(),
@@ -69,7 +67,6 @@ class JualFragment : Fragment() {
         binding.spinnerKondisi.adapter = kondisiAdapter
     }
 
-    // ── Upload foto dari galeri ───────────────────────────────────────────────
     private fun setupUploadFoto() {
         binding.layoutUploadFoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
@@ -84,21 +81,18 @@ class JualFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK) {
-            // TODO: tampilkan preview foto yang dipilih
             Toast.makeText(requireContext(), "Foto berhasil dipilih", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // ── Validasi & Submit ─────────────────────────────────────────────────────
     private fun setupSubmit() {
         binding.btnPasangIklan.setOnClickListener {
             val nama    = binding.etNamaBurung.text.toString().trim()
             val harga   = binding.etHarga.text.toString().trim()
             val deskripsi = binding.etDeskripsi.text.toString().trim()
-            val kategori = binding.spinnerKategori.selectedItemPosition  // 0 = belum pilih
-            val kondisi  = binding.spinnerKondisi.selectedItemPosition
+            val kategoriPos = binding.spinnerKategori.selectedItemPosition
+            val kondisiPos  = binding.spinnerKondisi.selectedItemPosition
 
-            // Validasi sederhana
             when {
                 nama.isEmpty() -> {
                     binding.etNamaBurung.error = "Nama tidak boleh kosong"
@@ -108,23 +102,46 @@ class JualFragment : Fragment() {
                     binding.etHarga.error = "Masukkan harga yang valid"
                     binding.etHarga.requestFocus()
                 }
-                kategori == 0 -> {
+                kategoriPos == 0 -> {
                     Toast.makeText(requireContext(), "Pilih kategori dulu ya!", Toast.LENGTH_SHORT).show()
                 }
-                kondisi == 0 -> {
+                kondisiPos == 0 -> {
                     Toast.makeText(requireContext(), "Pilih kondisi dulu ya!", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    submitIklan(nama, harga.toLong(), deskripsi)
+                    val kategori = binding.spinnerKategori.selectedItem.toString()
+                    val kondisi = binding.spinnerKondisi.selectedItem.toString()
+                    submitIklan(nama, harga.toLong(), deskripsi, kategori, kondisi)
                 }
             }
         }
     }
 
-    private fun submitIklan(nama: String, harga: Long, deskripsi: String) {
-        Toast.makeText(requireContext(), "Iklan berhasil dipasang! 🎉", Toast.LENGTH_SHORT).show()
+    private fun submitIklan(nama: String, harga: Long, deskripsi: String, kategori: String, kondisi: String) {
+        val prefs = requireContext().getSharedPreferences("USER_SESSION", android.content.Context.MODE_PRIVATE)
+        val userId = prefs.getInt("USER_ID", 1)
+        val nextId = repository.getNextBurungItemId()
 
-        // Kembali ke Market setelah sukses
+        val emojiMap = mapOf(
+            "Burung" to "🐦", "Kandang" to "🧰", "Pakan" to "🌾", "Perlengkapan" to "💊"
+        )
+
+        val item = BurungItem(
+            id = nextId,
+            nama = nama,
+            jenis = kategori,
+            harga = harga,
+            lokasi = "",
+            kondisi = kondisi,
+            penjual = "",
+            ratingPenjual = 0f,
+            deskripsi = deskripsi,
+            emojiGambar = emojiMap[kategori] ?: "📦",
+            penjualId = userId
+        )
+        repository.insertBurungItem(item)
+
+        Toast.makeText(requireContext(), "Iklan berhasil dipasang!", Toast.LENGTH_SHORT).show()
         (activity as? MainActivity)?.loadFragment(MarketplaceFragment())
     }
 
