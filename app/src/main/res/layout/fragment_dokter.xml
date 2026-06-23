@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- fragment_dokter.xml -->
-<!-- Tab: Dokter (🩺) — KicauMart -->
+<!-- Tab: Dokter (🩺) — MarketLit -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,40 +10,33 @@
     android:orientation="vertical"
     android:background="@color/bg_surface">
 
-    <!-- Top Bar -->
-    <LinearLayout
+    <!-- Top Bar (exactly 56dp and centered) -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:background="@color/green_dark"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="12dp">
+        android:paddingHorizontal="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Dokter Burung"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dokter Burung"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-medium" />
-
-            <ImageView
-                android:id="@+id/btnNotifDokter"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_bell"
-                app:tint="@color/white_80"
-                android:contentDescription="Notifikasi" />
-        </LinearLayout>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/btnNotifDokter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_bell"
+            app:tint="@color/white_80"
+            android:contentDescription="Notifikasi" />
+    </RelativeLayout>
 
     <!-- Search + Filter Chips -->
     <LinearLayout

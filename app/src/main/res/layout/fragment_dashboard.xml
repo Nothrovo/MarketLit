@@ -3,200 +3,644 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F6">
+    android:background="@color/bg_cream">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNav"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- ========== TOPBAR ========== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/sage_dark"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:gravity="center_vertical">
+
+                <!-- Logo -->
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="🦜 MarketLit"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <!-- Notif -->
+                <TextView
+                    android:id="@+id/ivNotif"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="🔔"
+                    android:textSize="20sp" />
+
+                <!-- Keranjang -->
+                <TextView
+                    android:id="@+id/ivKeranjang"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="🛒"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <!-- ========== SECTION KATEGORI ========== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sage_dark"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:background="@color/bg_cream"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="18dp"
+                android:paddingBottom="4dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dashboard Kicau"
                     android:fontFamily="@font/poppins_bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"/>
+                    android:text="Kategori"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp" />
 
-                <LinearLayout
+                <!-- Horizontal scroll kategori -->
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#1AFFFFFF"
-                    android:padding="15dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:scrollbars="none">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Listing" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
-                    </LinearLayout>
+                        android:orientation="horizontal"
+                        android:paddingBottom="4dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
-                    </LinearLayout>
+                        <!-- Chip: Jual Burung -->
+                        <LinearLayout
+                            android:id="@+id/catJualBurung"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.8" android:textColor="#FFFFFF" android:fontFamily="@font/poppins_bold" android:textSize="16sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rating" android:textColor="#B3FFFFFF" android:fontFamily="@font/poppins" android:textSize="10sp"/>
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:background="@drawable/circle_bg_green_light"
+                                android:gravity="center"
+                                android:text="🐦"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Jual Burung"
+                                android:textColor="@color/text_dark"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <!-- Chip: Lomba Kicau -->
+                        <LinearLayout
+                            android:id="@+id/catLomba"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:background="@drawable/circle_bg_amber"
+                                android:gravity="center"
+                                android:text="🏆"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Lomba Kicau"
+                                android:textColor="@color/text_dark"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <!-- Chip: Drh. Burung -->
+                        <LinearLayout
+                            android:id="@+id/catDokter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:background="@drawable/circle_bg_white"
+                                android:gravity="center"
+                                android:text="🩺"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Drh. Burung"
+                                android:textColor="@color/text_dark"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <!-- Chip: Perlengkapan -->
+                        <LinearLayout
+                            android:id="@+id/catPerlengkapan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:background="@drawable/circle_bg_green_light"
+                                android:gravity="center"
+                                android:text="🛒"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Perlengkapan"
+                                android:textColor="@color/text_dark"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <!-- Chip: Peternak -->
+                        <LinearLayout
+                            android:id="@+id/catPeternak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginEnd="4dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless">
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:background="@drawable/circle_bg_amber"
+                                android:gravity="center"
+                                android:text="🥚"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Peternak"
+                                android:textColor="@color/text_dark"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
-                </LinearLayout>
+                </HorizontalScrollView>
+
             </LinearLayout>
 
+            <!-- ========== BANNER PROMO ========== -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="4dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    android:layout_marginBottom="20dp">
-                    <ImageView
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#3E5C44"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_splash" />
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Kolom kiri: konten teks & tombol -->
+                        <LinearLayout
+                            android:id="@+id/bannerContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/tvBannerEmoji"
+                            android:orientation="vertical">
+
+                            <!-- Tag amber -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_badge_amber_pill"
+                                android:fontFamily="@font/poppins_bold"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="✨ Lomba Terbaru"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10sp" />
+
+                            <!-- Judul -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Kicau Mania Cup 2025"
+                                android:textColor="#FFFFFF"
+                                android:textSize="17sp" />
+
+                            <!-- Subjudul -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Hadiah total 50 juta"
+                                android:textColor="#CCFFFFFF"
+                                android:textSize="12sp" />
+
+                            <!-- Tombol Daftar -->
+                            <TextView
+                                android:id="@+id/btnDaftarBanner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:background="@drawable/bg_btn_amber_pill"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:fontFamily="@font/poppins_bold"
+                                android:paddingLeft="18dp"
+                                android:paddingRight="18dp"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="8dp"
+                                android:text="Daftar Sekarang"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <!-- Emoji besar di kanan -->
+                        <TextView
+                            android:id="@+id/tvBannerEmoji"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="🦜"
+                            android:textSize="64sp" />
+
+                    </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kategori Pilihan"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="12dp"/>
+            </LinearLayout>
 
+            <!-- ========== SECTION BURUNG PILIHAN ========== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="4dp"
+                android:orientation="vertical">
+
+                <!-- Header row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginBottom="24dp"
-                    android:baselineAligned="false">
+                    android:layout_marginBottom="12dp">
 
-                    <LinearLayout
-                        android:id="@+id/menuPasar"
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Burung Pilihan"
+                        android:textColor="@color/text_dark"
+                        android:textSize="15sp" />
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="12dp"
-                            android:src="@android:drawable/ic_menu_gallery" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Pasar Burung"
-                            android:fontFamily="@font/poppins"
-                            android:textColor="#333333"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/menuLomba"
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tvLihatSemua"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:fontFamily="@font/poppins"
+                        android:text="Lihat semua →"
+                        android:textColor="@color/sage_dark"
+                        android:textSize="12sp" />
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="12dp"
-                            android:src="@android:drawable/ic_menu_agenda" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Info Lomba"
-                            android:fontFamily="@font/poppins"
-                            android:textColor="#333333"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/menuDokter"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="12dp"
-                            android:src="@android:drawable/ic_menu_add" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Dokter Kicau"
-                            android:fontFamily="@font/poppins"
-                            android:textColor="#333333"
-                            android:textSize="12sp" />
-                    </LinearLayout>
                 </LinearLayout>
+
+                <!-- Horizontal RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBurungPilihan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+
+            <!-- ========== SECTION PENGUMUMAN ========== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="24dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rekomendasi Hari Ini"
                     android:fontFamily="@font/poppins_bold"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="12dp"/>
+                    android:text="Pengumuman"
+                    android:textColor="@color/text_dark"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="12dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRekomendasi"
+                <!-- Item Pengumuman 1 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/layoutAnnounce1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border"
+                    app:cardBackgroundColor="@color/bg_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/circle_bg_green_light"
+                            android:gravity="center"
+                            android:text="📢"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Lomba Regional Jawa Timur"
+                                android:textColor="@color/text_dark"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Pendaftaran dibuka 1-30 Juli 2025"
+                                android:textColor="@color/text_light"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_amber_pill"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:text="Baru"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Item Pengumuman 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/layoutAnnounce2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border"
+                    app:cardBackgroundColor="@color/bg_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/circle_bg_amber"
+                            android:gravity="center"
+                            android:text="🏥"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Konsultasi Drh. Gratis Sabtu Ini"
+                                android:textColor="@color/text_dark"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Tersedia untuk 20 pengguna pertama"
+                                android:textColor="@color/text_light"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_amber_pill"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:text="Baru"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Item Pengumuman 3 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/layoutAnnounce3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border"
+                    app:cardBackgroundColor="@color/bg_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/circle_bg_green_light"
+                            android:gravity="center"
+                            android:text="🌟"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Fitur Chat Penjual Tersedia!"
+                                android:textColor="@color/text_dark"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Negosiasi langsung lebih mudah sekarang"
+                                android:textColor="@color/text_light"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_grey_pill"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:text="Info"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

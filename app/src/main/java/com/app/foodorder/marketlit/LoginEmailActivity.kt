@@ -14,6 +14,7 @@ class LoginEmailActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_email)
 
@@ -69,7 +70,6 @@ class LoginEmailActivity : AppCompatActivity() {
         tvGoToRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-            finish() // Opsional: tutup login biar kalau user pencet back di Register, gak balik kesini (sesuai selera alurmu)
         }
     }
 }

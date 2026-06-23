@@ -1,0 +1,74 @@
+<resources>
+    <!-- Base -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- Background -->
+    <color name="bg_white">#1E1E1E</color>
+    <color name="bg_cream">#121212</color>
+    <color name="bg_light_green">#1B3B24</color>
+
+    <!-- Primary (Green) -->
+    <color name="primary_light">#5C7A62</color>
+    <color name="primary">#7A9E82</color>
+    <color name="primary_dark">#2E4433</color>
+
+    <!-- Accent (Amber) -->
+    <color name="accent_light">#B87333</color>
+    <color name="accent">#D4986A</color>
+    <color name="accent_dark">#6E3E1A</color>
+
+    <!-- Text -->
+    <color name="text_dark">#F5F5F5</color>
+    <color name="text_mid">#C5CFC9</color>
+    <color name="text_light">#9AA5A0</color>
+
+    <!-- Border -->
+    <color name="border_color">#2C2C2C</color>
+    <color name="border">#2C2C2C</color>
+
+    <!-- Backward compatibility -->
+    <color name="colorPrimary">#7A9E82</color>
+    <color name="colorPrimaryDark">#2E4433</color>
+    <color name="colorAccent">#D4986A</color>
+    <color name="textDark">#F5F5F5</color>
+    <color name="bgLight">#121212</color>
+
+    <!-- Legacy naming -->
+    <color name="sage_light">#5C7A62</color>
+    <color name="sage_mid">#7A9E82</color>
+    <color name="sage_dark">#2E4433</color>
+
+    <color name="terra_light">#B87333</color>
+    <color name="terra_mid">#D4986A</color>
+    <color name="terra_dark">#6E3E1A</color>
+
+    <color name="kicau_bg_light">#121212</color>
+    <color name="kicau_bg_chip">#1B3B24</color>
+    <color name="kicau_green_mid">#7A9E82</color>
+    <color name="kicau_amber_main">#D4986A</color>
+
+    <!-- Extra palette -->
+    <color name="g30">#4CAF50</color>
+    <color name="g30b">#81C784</color>
+    <color name="g30ll">#1B3B24</color>
+    <color name="a10ll">#3E2C1B</color>
+    <color name="n60">#2C2C2C</color>
+
+    <color name="green_dark">#2E4433</color>
+    <color name="green_mid">#7A9E82</color>
+    <color name="green_light">#5C7A62</color>
+    <color name="green_light_ll">#1B3B24</color>
+    <color name="amber">#D4986A</color>
+    <color name="amber_dark">#6E3E1A</color>
+    <color name="amber_light">#B87333</color>
+    <color name="amber_light_ll">#3E2C1B</color>
+    <color name="bg_surface">#121212</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_55">#8CFFFFFF</color>
+    <color name="a10">#D4986A</color>
+    <color name="a10d">#6E3E1A</color>
+
+    <color name="borderColor">#2C2C2C</color>
+    <color name="textLight">#9AA5A0</color>
+</resources>

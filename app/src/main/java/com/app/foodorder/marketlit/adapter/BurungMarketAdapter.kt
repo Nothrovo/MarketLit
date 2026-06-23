@@ -15,13 +15,14 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class BurungMarketAdapter(
-    private var items: List<BurungItem>
+    private var items: List<BurungItem>,
+    private val onKeranjangClick: (BurungItem) -> Unit = {}
 ) : RecyclerView.Adapter<BurungMarketAdapter.BurungViewHolder>() {
 
     private val rupiahFormat = NumberFormat.getNumberInstance(Locale("id", "ID"))
 
     inner class BurungViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val card: CardView       = itemView.findViewById(R.id.cardBurung) // r`oot CardView
+        val card: CardView       = itemView.findViewById(R.id.cardBurung)
         val viewImgBg: View      = itemView.findViewById(R.id.viewImgBg)
         val tvEmoji: TextView    = itemView.findViewById(R.id.tvBirdEmoji)
         val tvBadge: TextView    = itemView.findViewById(R.id.tvBadge)
@@ -51,13 +52,6 @@ class BurungMarketAdapter(
                 if (item.bgAmber) R.color.a10ll else R.color.g30ll
             )
         )
-        holder.itemView.setOnClickListener {
-            val intent = Intent(ctx, DetailBurungActivity::class.java)
-            // Kalau cara DetailBurungActivity.EXTRA_BURUNG masih merah,
-            // pakai string manual saja sementara:
-            intent.putExtra("EXTRA_BURUNG", item)
-            ctx.startActivity(intent)
-        }
 
         // Emoji burung
         holder.tvEmoji.text = item.emojiGambar
@@ -84,9 +78,16 @@ class BurungMarketAdapter(
         // Click → Detail
         holder.itemView.setOnClickListener {
             val intent = Intent(ctx, DetailBurungActivity::class.java)
-            // "EXTRA_BURUNG" adalah nama kuncinya, item adalah datanya
             intent.putExtra("EXTRA_BURUNG", item)
             ctx.startActivity(intent)
+        }
+
+        // Long Click → Add to Keranjang
+        holder.itemView.setOnLongClickListener {
+            if (item.stokTersedia) {
+                onKeranjangClick(item)
+            }
+            true
         }
     }
 

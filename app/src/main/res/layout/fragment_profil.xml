@@ -22,17 +22,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/sage_dark"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="vertical">
 
-                <!-- Judul + Ikon Pengaturan -->
+                <!-- Title Row: exactly 56dp -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="56dp"
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Profil Saya"
                         android:textColor="@color/bg_white"
@@ -42,6 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         android:text="⚙️"
                         android:textSize="18sp" />
                 </RelativeLayout>
@@ -50,7 +52,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="12dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -88,12 +91,13 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Statistik: Listing · Lomba · Rating -->
+                <!-- Statistik: Listing · Lomba · Rating (rounded modern container) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#1AFFFFFF"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_stat_row_rounded"
                     android:orientation="horizontal"
                     android:padding="10dp"
                     android:weightSum="3">
@@ -242,12 +246,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FAF0E4"
+                            android:background="@drawable/bg_badge_amber_light_rounded"
                             android:fontFamily="@font/poppins_bold"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
                             android:text="Juara 1"
-                            android:textColor="#8A5220"
+                            android:textColor="@color/amber_dark"
                             android:textSize="9sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -281,7 +285,7 @@
                         <TextView
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:background="#FAF0E4"
+                            android:background="@drawable/bg_badge_amber_light_rounded"
                             android:gravity="center"
                             android:text="🥇"
                             android:textSize="18sp" />

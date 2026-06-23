@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Emoji Item -->
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_bg_green_light"
+            android:gravity="center"
+            android:text="🐦"
+            android:textSize="18sp" />
+
+        <!-- Info Transaksi -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tvNamaItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Item"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_dark" />
+
+            <TextView
+                android:id="@+id/tvHargaItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 0"
+                android:textSize="11sp"
+                android:textColor="#3E5C44"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tvTanggalItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:textSize="10sp"
+                android:textColor="#9E9E9E" />
+
+        </LinearLayout>
+
+        <!-- Badge Tipe: Dibeli / Dijual -->
+        <TextView
+            android:id="@+id/tvTipeItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dibeli"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:background="#E8F5E9"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

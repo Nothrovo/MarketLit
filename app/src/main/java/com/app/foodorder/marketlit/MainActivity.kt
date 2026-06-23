@@ -13,6 +13,7 @@ import com.app.foodorder.marketlit.ui.MarketplaceFragment
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         // Load fragment pertama kali aplikasi dibuka
         if (savedInstanceState == null) {
-            loadFragment(LombaFragment()) // Gua set langsung ke LombaFragment tugas lu
+            loadFragment(DashboardFragment())
         }
 
         // ==========================================
@@ -37,16 +38,14 @@ class MainActivity : AppCompatActivity() {
 
         // 2. Kasih perintah klik (OnClickListener) untuk ganti Fragment
         navHome.setOnClickListener {
-            loadFragment(DashboardFragment()) // Buka komen (hapus //) kalau file-nya udah lu/temen lu bikin
+            loadFragment(DashboardFragment())
         }
 
         navLomba.setOnClickListener {
-            // Ini page tugas lu
             loadFragment(LombaFragment())
         }
 
         navMarket.setOnClickListener {
-            // Contoh kalau temen lu udah bikin MarketplaceFragment:
             loadFragment(MarketplaceFragment())
         }
 
@@ -60,9 +59,65 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Fungsi sakti buat masukin Fragment ke dalam FrameLayout (container)
-    private fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment) // Pastikan ID ini sama dengan FrameLayout di activity_main.xml lu
             .commit()
+
+        // Automatically update bottom navigation active state based on fragment type
+        when (fragment) {
+            is DashboardFragment -> updateBottomNav(R.id.navHome)
+            is LombaFragment -> updateBottomNav(R.id.navLomba)
+            is MarketplaceFragment -> updateBottomNav(R.id.navMarket)
+            is DokterFragment -> updateBottomNav(R.id.navVet)
+            is ProfilFragment -> updateBottomNav(R.id.navProfil)
+        }
+    }
+
+    fun updateBottomNav(activeId: Int) {
+        val navHomeText = findViewById<android.widget.TextView>(R.id.navHomeText)
+        val navHomeDot = findViewById<android.view.View>(R.id.navHomeDot)
+        val navLombaText = findViewById<android.widget.TextView>(R.id.navLombaText)
+        val navLombaDot = findViewById<android.view.View>(R.id.navLombaDot)
+        val navMarketText = findViewById<android.widget.TextView>(R.id.navMarketText)
+        val navMarketDot = findViewById<android.view.View>(R.id.navMarketDot)
+        val navVetText = findViewById<android.widget.TextView>(R.id.navVetText)
+        val navVetDot = findViewById<android.view.View>(R.id.navVetDot)
+        val navProfilText = findViewById<android.widget.TextView>(R.id.navProfilText)
+        val navProfilDot = findViewById<android.view.View>(R.id.navProfilDot)
+
+        val poppinsRegular = androidx.core.content.res.ResourcesCompat.getFont(this, R.font.poppins)
+        val poppinsBold = androidx.core.content.res.ResourcesCompat.getFont(this, R.font.poppins_bold)
+        val sageDark = Color.parseColor("#3E5C44")
+        val textLight = Color.parseColor("#8A9590")
+
+        val textViews = mapOf(
+            R.id.navHome to navHomeText,
+            R.id.navLomba to navLombaText,
+            R.id.navMarket to navMarketText,
+            R.id.navVet to navVetText,
+            R.id.navProfil to navProfilText
+        )
+        val dots = mapOf(
+            R.id.navHome to navHomeDot,
+            R.id.navLomba to navLombaDot,
+            R.id.navMarket to navMarketDot,
+            R.id.navVet to navVetDot,
+            R.id.navProfil to navProfilDot
+        )
+
+        for (id in textViews.keys) {
+            val tv = textViews[id]
+            val dot = dots[id]
+            if (id == activeId) {
+                tv?.setTextColor(sageDark)
+                tv?.typeface = poppinsBold
+                dot?.visibility = android.view.View.VISIBLE
+            } else {
+                tv?.setTextColor(textLight)
+                tv?.typeface = poppinsRegular
+                dot?.visibility = android.view.View.GONE
+            }
+        }
     }
 }

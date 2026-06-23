@@ -1,6 +1,7 @@
 // DokterAdapter.kt
 package com.app.foodorder.marketlit
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -19,51 +20,58 @@ class DokterAdapter(
 
         fun bind(dokter: DokterViewModel.Dokter) {
             binding.apply {
-                // Info dasar
-                tvDokterNama.text      = dokter.nama
-                tvDokterSpesialis.text = "${dokter.spesialis} · ${dokter.pengalaman} thn"
-                tvDokterRating.text    = buildRatingStars(dokter.rating) +
+                // ── Avatar emoji ──────────────────────────────────────────────────
+                tvAvatarDokter.text = dokter.avatarEmoji
+
+                // Warna background avatar sesuai status
+                val avatarBgColor = when (dokter.status) {
+                    DokterViewModel.Status.ONLINE  -> Color.parseColor("#E8F5E9")
+                    DokterViewModel.Status.SIBUK   -> Color.parseColor("#FFF8E1")
+                    DokterViewModel.Status.OFFLINE -> Color.parseColor("#F0F0EE")
+                }
+                llAvatarDokter.setBackgroundColor(avatarBgColor)
+                // Pertahankan bentuk bulat dari drawable dengan overlay warna
+                llAvatarDokter.background = itemView.context.getDrawable(
+                    R.drawable.bg_avatar_green
+                )?.also { drawable ->
+                    drawable.setTint(avatarBgColor)
+                }
+
+                // ── Info dasar ────────────────────────────────────────────────────
+                tvNamaDokter.text      = dokter.nama
+                tvSpesialisDokter.text = "${dokter.spesialis} · ${dokter.pengalaman} thn"
+                tvRatingDokter.text    = buildRatingStars(dokter.rating) +
                         " ${dokter.rating} (${dokter.jumlahUlasan})"
 
-                // Avatar emoji
-                imgDokterAvatar.contentDescription = dokter.nama
-
-                // Status badge
+                // ── Status badge ──────────────────────────────────────────────────
                 when (dokter.status) {
                     DokterViewModel.Status.ONLINE -> {
-                        tvDokterStatus.text = "● Online"
-                        tvDokterStatus.setBackgroundResource(R.drawable.bg_badge_status_online)
-                        tvDokterStatus.setTextColor(
-                            itemView.context.getColor(R.color.green_dark)
-                        )
+                        tvStatusDokter.text = "● Online"
+                        tvStatusDokter.setBackgroundResource(R.drawable.bg_badge_status_online)
+                        tvStatusDokter.setTextColor(Color.parseColor("#1B5E20"))
                     }
                     DokterViewModel.Status.SIBUK -> {
-                        tvDokterStatus.text = "Sibuk"
-                        tvDokterStatus.setBackgroundResource(R.drawable.bg_badge_status_sibuk)
-                        tvDokterStatus.setTextColor(
-                            itemView.context.getColor(R.color.text_light)
-                        )
+                        tvStatusDokter.text = "Sibuk"
+                        tvStatusDokter.setBackgroundResource(R.drawable.bg_badge_status_sibuk)
+                        tvStatusDokter.setTextColor(Color.parseColor("#8A9590"))
                     }
                     DokterViewModel.Status.OFFLINE -> {
-                        tvDokterStatus.text = "Offline"
-                        tvDokterStatus.setBackgroundResource(R.drawable.bg_badge_status_sibuk)
-                        tvDokterStatus.setTextColor(
-                            itemView.context.getColor(R.color.text_light)
-                        )
+                        tvStatusDokter.text = "Offline"
+                        tvStatusDokter.setBackgroundResource(R.drawable.bg_badge_status_sibuk)
+                        tvStatusDokter.setTextColor(Color.parseColor("#8A9590"))
                     }
                 }
 
-                if (dokter.status == DokterViewModel.Status.ONLINE) {
-                    btnDokterAksi.text = "Chat"
-                    btnDokterAksi.setOnClickListener { onChatClick(dokter) }
-                } else {
-                    btnDokterAksi.text = "Jadwal"
-                    btnDokterAksi.setOnClickListener { onJadwalClick(dokter) }
-                }
+                // ── Tombol Chat (aksi utama, selalu tampil) ───────────────────────
+                btnAksiDokter.text = "Chat"
+                btnAksiDokter.setOnClickListener { onChatClick(dokter) }
+
+                // ── Tombol Jadwal (selalu tampil, outline) ────────────────────────
+                btnJadwalDokter.setOnClickListener { onJadwalClick(dokter) }
             }
         }
 
-        // Bintang rating berdasarkan nilai (misal 4.7 → ★★★★☆)
+        /** Bangun string bintang rating: 4.7 → ★★★★☆ */
         private fun buildRatingStars(rating: Double): String {
             val full  = rating.toInt()
             val empty = 5 - full

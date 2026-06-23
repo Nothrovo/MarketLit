@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_cream"
+    android:fitsSystemWindows="true">
+
+    <!-- ===== TOPBAR ===== -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#3E5C44"
+        android:paddingStart="4dp"
+        android:paddingEnd="16dp">
+
+        <Button
+            android:id="@+id/btnBackRiwayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="←"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Riwayat Aktivitas"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <!-- ===== TAB ROW ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bg_white"
+        android:elevation="2dp"
+        android:weightSum="2">
+
+        <!-- Tab: Lomba Diikuti -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvTabLomba"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lomba Diikuti"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#1B5E20"
+                android:gravity="center" />
+
+            <View
+                android:id="@+id/indicatorLomba"
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:background="#1B5E20"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <!-- Tab: Transaksi -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvTabTransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaksi"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                android:textColor="#9E9E9E"
+                android:gravity="center" />
+
+            <View
+                android:id="@+id/indicatorTransaksi"
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:background="#1B5E20"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ===== CONTENT ===== -->
+
+    <!-- RecyclerView Lomba -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRiwayatLomba"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:visibility="visible" />
+
+    <!-- RecyclerView Transaksi -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRiwayatTransaksi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:visibility="gone" />
+
+</LinearLayout>

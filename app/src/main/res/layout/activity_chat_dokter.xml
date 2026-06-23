@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_chat_dokter.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_cream"
+    android:fitsSystemWindows="true">
+
+    <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/topbarChat"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/sage_dark"
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true">
+
+        <!-- Tombol Back -->
+        <Button
+            android:id="@+id/btnBackChat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="←"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:padding="4dp" />
+
+        <!-- Avatar emoji dokter kecil -->
+        <LinearLayout
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_avatar_green"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/tvAvatarChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👨‍⚕️"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Nama + status -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNamaDokterChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="drh. Budi Santoso"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tvStatusChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Online"
+                android:textSize="11sp"
+                android:textColor="#A5D6A7" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── Input Area (bottom) ────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/inputAreaChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bg_white"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:elevation="4dp">
+
+        <EditText
+            android:id="@+id/etPesan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ketik pesan..."
+            android:textSize="14sp"
+            android:textColor="@color/text_dark"
+            android:textColorHint="@color/text_light"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp"
+            android:maxLines="4"
+            android:inputType="textMultiLine"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnKirim"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:text="Kirim"
+            android:textSize="13sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/g30b"
+            android:paddingHorizontal="16dp"
+            app:cornerRadius="22dp" />
+    </LinearLayout>
+
+    <!-- ── RecyclerView Chat ───────────────────────────────────────────────── -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbarChat"
+        android:layout_above="@id/inputAreaChat"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="none" />
+
+</RelativeLayout>

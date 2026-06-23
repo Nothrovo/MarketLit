@@ -14,6 +14,7 @@ class RegisterActivity : AppCompatActivity() {
     private var selectedRole = "Pembeli"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
@@ -35,38 +36,31 @@ class RegisterActivity : AppCompatActivity() {
 
                 // Reset warna semua chip ke warna netral (Background Cream, Teks Abu-abu)
                 roles.forEach {
-                    it.setBackgroundColor("#F8F8F6".toColorInt()) // bg_cream
-                    it.setTextColor("#4A5550".toColorInt())       // text_mid
+                    it.setBackgroundResource(R.drawable.bg_role_inactive)
+                    it.setTextColor(androidx.core.content.ContextCompat.getColor(this@RegisterActivity, R.color.text_mid))
                 }
 
                 // Set warna chip yang diklik menjadi GELAP (Background Hijau Tua, Teks Putih)
-                clicked.setBackgroundColor("#3E5C44".toColorInt()) // sage_dark
-                clicked.setTextColor("#FFFFFF".toColorInt())       // bg_white
+                clicked.setBackgroundResource(R.drawable.bg_role_active)
+                clicked.setTextColor(androidx.core.content.ContextCompat.getColor(this@RegisterActivity, R.color.bg_white))
 
                 Toast.makeText(this, "Mendaftar sebagai $selectedRole", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Tombol Kembali (Arrow Kiri Atas) diarahkan eksplisit ke LoginEmailActivity
+        // Tombol Kembali (Arrow Kiri Atas) diarahkan ke LoginEmailActivity (melalui finish())
         btnBackReg.setOnClickListener {
-            val intent = Intent(this, LoginEmailActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
         // Tombol Buat Akun diarahkan ke LoginEmailActivity
         btnRegister.setOnClickListener {
             Toast.makeText(this, "Akun $selectedRole berhasil dibuat!", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this, LoginEmailActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
         // Teks "Masuk di sini" diarahkan ke LoginEmailActivity
         tvGoToLogin.setOnClickListener {
-            val intent = Intent(this, LoginEmailActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

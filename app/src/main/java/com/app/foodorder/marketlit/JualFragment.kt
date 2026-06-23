@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.app.foodorder.marketlit.databinding.FragmentJualBinding
+import com.app.foodorder.marketlit.ui.MarketplaceFragment
 
 class JualFragment : Fragment() {
 
@@ -44,7 +44,7 @@ class JualFragment : Fragment() {
     // ── Tombol back di top bar ────────────────────────────────────────────────
     private fun setupTopBar() {
         binding.btnBackJual.setOnClickListener {
-            findNavController().popBackStack()
+            (activity as? MainActivity)?.loadFragment(MarketplaceFragment())
         }
     }
 
@@ -125,7 +125,7 @@ class JualFragment : Fragment() {
         Toast.makeText(requireContext(), "Iklan berhasil dipasang! 🎉", Toast.LENGTH_SHORT).show()
 
         // Kembali ke Market setelah sukses
-        findNavController().popBackStack()
+        (activity as? MainActivity)?.loadFragment(MarketplaceFragment())
     }
 
     override fun onDestroyView() {

@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KicauMart"
+            android:text="MarketLit"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -33,17 +33,18 @@
             android:textColor="#E0E0E0"
             android:textSize="16sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_mulai"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="20dp"
-            android:background="#1B5E20"
+            android:backgroundTint="#1B5E20"
             android:text="Mulai Mengkicau!"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
+            app:cornerRadius="16dp"
             android:textStyle="bold" />
 
     </LinearLayout>

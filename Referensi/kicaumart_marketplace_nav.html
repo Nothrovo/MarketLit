@@ -1,0 +1,440 @@
+
+<style>
+  :root {
+    --n60: #FFFFFF; --n60b: #F8F8F6;
+    --g30: #5C7A62; --g30b: #3E5C44; --g30l: #9DB8A2; --g30ll: #EDF4EF;
+    --a10: #B87333; --a10d: #8A5220; --a10l: #D4986A; --a10ll: #FAF0E4;
+    --text-dark: #1A1F1C; --text-mid: #4A5550; --text-light: #8A9590;
+    --border: rgba(60,90,66,0.11);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  .device-shell { width:360px; margin:0 auto; background:var(--n60); border-radius:32px; border:1.5px solid rgba(0,0,0,0.09); overflow:hidden; font-family:var(--font-sans,system-ui,sans-serif); position:relative; }
+  .status-bar { background:var(--g30b); padding:10px 20px 6px; display:flex; justify-content:space-between; align-items:center; }
+  .status-bar span { color:rgba(255,255,255,0.8); font-size:11px; font-weight:500; }
+  .topbar { background:var(--g30b); padding:10px 16px 14px; }
+  .topbar-row1 { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .logo-text { font-size:18px; font-weight:500; color:#fff; }
+  .topbar-icons { display:flex; gap:14px; }
+  .topbar-icons span { font-size:16px; color:rgba(255,255,255,0.8); }
+  .searchbar { background:rgba(255,255,255,0.12); border-radius:10px; padding:8px 12px; display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.18); }
+  .searchbar-text { font-size:13px; color:rgba(255,255,255,0.5); }
+  .scroll-area { height:580px; overflow-y:auto; scrollbar-width:none; background:var(--n60b); padding-bottom:72px; }
+  .scroll-area::-webkit-scrollbar { display:none; }
+  .section { padding:14px 14px 4px; }
+  .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .section-title { font-size:14px; font-weight:500; color:var(--text-dark); }
+  .see-all { font-size:11px; color:var(--g30); font-weight:500; }
+  .cats-row { display:flex; gap:8px; padding:0 14px 8px; overflow-x:auto; scrollbar-width:none; }
+  .cats-row::-webkit-scrollbar { display:none; }
+  .cat-chip { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; min-width:62px; }
+  .cat-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--g30ll); border:1px solid var(--border); flex-shrink:0; }
+  .cat-icon.amber { background:var(--a10ll); border-color:rgba(184,115,51,0.16); }
+  .cat-icon.white { background:#fff; border-color:var(--border); }
+  .cat-label { font-size:10px; color:var(--text-mid); text-align:center; font-weight:500; line-height:1.2; }
+  .banner-area { padding:0 14px; margin-bottom:4px; }
+  .banner { background:var(--g30b); border-radius:14px; padding:14px 14px 14px 16px; display:flex; justify-content:space-between; align-items:center; overflow:hidden; position:relative; }
+  .banner::before { content:''; position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,0.04); }
+  .banner-left { flex:1; }
+  .banner-tag { background:var(--a10); color:#fff; font-size:9px; font-weight:500; padding:3px 8px; border-radius:20px; display:inline-block; margin-bottom:6px; }
+  .banner-title { font-size:15px; font-weight:500; color:#fff; line-height:1.3; margin-bottom:4px; }
+  .banner-sub { font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:10px; }
+  .banner-btn { background:var(--a10); color:#fff; font-size:11px; font-weight:500; padding:6px 14px; border-radius:20px; display:inline-block; }
+  .bird-cards { display:flex; gap:10px; overflow-x:auto; padding:2px 14px 8px; scrollbar-width:none; }
+  .bird-cards::-webkit-scrollbar { display:none; }
+  .bird-card { background:#fff; border-radius:14px; border:0.5px solid var(--border); min-width:140px; overflow:hidden; cursor:pointer; flex-shrink:0; }
+  .bird-img { height:90px; background:var(--g30ll); display:flex; align-items:center; justify-content:center; font-size:38px; position:relative; }
+  .bird-img.amber-bg { background:var(--a10ll); }
+  .bird-badge { position:absolute; top:6px; right:6px; background:var(--g30); color:#fff; font-size:9px; font-weight:500; padding:2px 6px; border-radius:20px; }
+  .bird-badge.sold { background:#8A9590; }
+  .bird-info { padding:8px 10px; }
+  .bird-name { font-size:12px; font-weight:500; color:var(--text-dark); margin-bottom:2px; }
+  .bird-price { font-size:13px; font-weight:500; color:var(--g30b); margin-bottom:2px; }
+  .bird-loc { font-size:10px; color:var(--text-light); }
+  .announce-list { padding:0 14px 8px; display:flex; flex-direction:column; gap:8px; }
+  .announce-item { background:#fff; border-radius:12px; border:0.5px solid var(--border); padding:10px 12px; display:flex; align-items:center; gap:10px; cursor:pointer; }
+  .announce-icon { width:36px; height:36px; border-radius:10px; background:var(--g30ll); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .announce-icon.amber { background:var(--a10ll); }
+  .announce-title { font-size:12px; font-weight:500; color:var(--text-dark); margin-bottom:2px; }
+  .announce-meta { font-size:10px; color:var(--text-light); }
+  .announce-new { background:var(--g30); color:#fff; font-size:9px; padding:2px 6px; border-radius:20px; flex-shrink:0; }
+  .bottom-nav { position:absolute; bottom:0; left:0; right:0; background:#fff; border-top:0.5px solid var(--border); display:flex; padding:8px 0 12px; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:4px 0; }
+  .nav-icon { font-size:20px; }
+  .nav-label { font-size:9px; color:var(--text-light); font-weight:500; }
+  .nav-item.active .nav-label { color:var(--g30b); font-weight:500; }
+  .nav-dot { width:4px; height:4px; border-radius:50%; background:var(--g30b); margin-top:-2px; }
+  .screen-selector { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+  .screen-btn { background:#fff; border:0.5px solid var(--border); color:var(--text-mid); font-size:11px; font-weight:500; padding:5px 12px; border-radius:20px; cursor:pointer; }
+  .screen-btn.active { background:var(--g30b); color:white; border-color:var(--g30b); }
+  /* filter chips */
+  .chip-row { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding:0 14px 10px; }
+  .chip-row::-webkit-scrollbar { display:none; }
+  .chip { background:#fff; border:0.5px solid var(--border); color:var(--text-mid); font-size:10px; font-weight:500; padding:5px 12px; border-radius:20px; white-space:nowrap; cursor:pointer; }
+  .chip.active { background:var(--g30b); color:#fff; border-color:var(--g30b); }
+  /* market grid */
+  .mkt-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 14px 8px; }
+  .mkt-card { background:#fff; border-radius:14px; border:0.5px solid var(--border); overflow:hidden; cursor:pointer; }
+  .mkt-img { height:100px; display:flex; align-items:center; justify-content:center; font-size:40px; position:relative; }
+  .mkt-img.green { background:var(--g30ll); }
+  .mkt-img.amber { background:var(--a10ll); }
+  .mkt-badge { position:absolute; top:6px; left:6px; font-size:8px; font-weight:500; padding:2px 6px; border-radius:20px; }
+  .mkt-badge.bird { background:var(--g30b); color:#fff; }
+  .mkt-badge.acc { background:var(--a10); color:#fff; }
+  .mkt-badge.sold { background:#8A9590; color:#fff; }
+  .mkt-fav { position:absolute; top:6px; right:8px; font-size:14px; }
+  .mkt-info { padding:8px 10px; }
+  .mkt-name { font-size:11px; font-weight:500; color:var(--text-dark); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mkt-sub { font-size:9px; color:var(--text-light); margin-bottom:4px; }
+  .mkt-price { font-size:12px; font-weight:500; color:var(--g30b); }
+  /* FAB jual */
+  .fab { position:absolute; bottom:72px; right:14px; background:var(--a10); color:#fff; border-radius:24px; padding:10px 16px; display:flex; align-items:center; gap:6px; font-size:12px; font-weight:500; box-shadow:0 4px 14px rgba(184,115,51,0.35); cursor:pointer; z-index:10; }
+</style>
+
+<h2 class="sr-only">KicauMart — bottom nav marketplace update, tab jual diganti jadi market</h2>
+
+<div style="padding:16px 8px;">
+  <div class="screen-selector">
+    <button class="screen-btn active" onclick="show('home')">Home</button>
+    <button class="screen-btn" onclick="show('market')">Market</button>
+    <button class="screen-btn" onclick="show('lomba')">Lomba</button>
+    <button class="screen-btn" onclick="show('vet')">Dokter</button>
+    <button class="screen-btn" onclick="show('profil')">Profil</button>
+  </div>
+
+  <div class="device-shell">
+    <div class="status-bar"><span>9:41</span><span>●●● ▲ 100%</span></div>
+
+    <!-- HOME -->
+    <div id="s-home">
+      <div class="topbar">
+        <div class="topbar-row1">
+          <div class="logo-text">🦜 KicauMart</div>
+          <div class="topbar-icons"><span>🔔</span><span>🛒</span></div>
+        </div>
+        <div class="searchbar">
+          <span style="font-size:14px;color:rgba(255,255,255,0.55);">🔍</span>
+          <span class="searchbar-text">Cari burung, perlengkapan, lomba…</span>
+        </div>
+      </div>
+      <div class="scroll-area">
+        <div class="section"><div class="section-header"><span class="section-title">Kategori</span></div></div>
+        <div class="cats-row">
+          <div class="cat-chip"><div class="cat-icon">🐦</div><span class="cat-label">Jual Burung</span></div>
+          <div class="cat-chip"><div class="cat-icon amber">🏆</div><span class="cat-label">Lomba Kicau</span></div>
+          <div class="cat-chip"><div class="cat-icon white">🩺</div><span class="cat-label">Drh. Burung</span></div>
+          <div class="cat-chip"><div class="cat-icon">🛒</div><span class="cat-label">Perlengkapan</span></div>
+          <div class="cat-chip"><div class="cat-icon amber">🥚</div><span class="cat-label">Peternak</span></div>
+        </div>
+        <div class="banner-area">
+          <div class="banner">
+            <div class="banner-left">
+              <div class="banner-tag">✨ Lomba Terbaru</div>
+              <div class="banner-title">Kicau Mania<br>Cup 2025</div>
+              <div class="banner-sub">Hadiah total 50 juta</div>
+              <div class="banner-btn">Daftar Sekarang</div>
+            </div>
+            <div style="font-size:52px;margin-right:4px;">🦜</div>
+          </div>
+        </div>
+        <div class="section" style="padding-bottom:0;"><div class="section-header"><span class="section-title">Burung Pilihan</span><span class="see-all" onclick="show('market')" style="cursor:pointer;">Lihat semua →</span></div></div>
+        <div class="bird-cards">
+          <div class="bird-card"><div class="bird-img">🐦<div class="bird-badge">Baru</div></div><div class="bird-info"><div class="bird-name">Murai Batu Medan</div><div class="bird-price">Rp 3.500.000</div><div class="bird-loc">📍 Medan, SU</div></div></div>
+          <div class="bird-card"><div class="bird-img amber-bg">🦜<div class="bird-badge">Premium</div></div><div class="bird-info"><div class="bird-name">Kenari F1 Juara</div><div class="bird-price">Rp 850.000</div><div class="bird-loc">📍 Surabaya, JT</div></div></div>
+          <div class="bird-card"><div class="bird-img">🦚<div class="bird-badge sold">Terjual</div></div><div class="bird-info"><div class="bird-name">Kacer Lokal Gacor</div><div class="bird-price">Rp 650.000</div><div class="bird-loc">📍 Jakarta, JK</div></div></div>
+          <div class="bird-card"><div class="bird-img amber-bg">🦅<div class="bird-badge">Baru</div></div><div class="bird-info"><div class="bird-name">Cucak Rowo</div><div class="bird-price">Rp 1.200.000</div><div class="bird-loc">📍 Bandung, JB</div></div></div>
+        </div>
+        <div class="section" style="padding-bottom:0;"><div class="section-header"><span class="section-title">Pengumuman</span><span class="see-all">Lihat semua →</span></div></div>
+        <div class="announce-list">
+          <div class="announce-item"><div class="announce-icon amber">📢</div><div style="flex:1;"><div class="announce-title">Update Jadwal Lomba Kicau Mei</div><div class="announce-meta">2 jam lalu · Admin</div></div><div class="announce-new">Baru</div></div>
+          <div class="announce-item"><div class="announce-icon">🌿</div><div style="flex:1;"><div class="announce-title">Tips Merawat Murai Batu Musim Hujan</div><div class="announce-meta">Kemarin · Komunitas</div></div></div>
+          <div class="announce-item"><div class="announce-icon amber">⚠️</div><div style="flex:1;"><div class="announce-title">Waspada Penjual Burung Palsu</div><div class="announce-meta">3 hari lalu · Admin</div></div></div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div><div class="nav-dot"></div></div>
+        <div class="nav-item" onclick="show('lomba')"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div></div>
+        <div class="nav-item" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div></div>
+        <div class="nav-item" onclick="show('vet')"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div></div>
+        <div class="nav-item" onclick="show('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
+      </div>
+    </div>
+
+    <!-- MARKET -->
+    <div id="s-market" style="display:none;">
+      <div class="topbar">
+        <div class="topbar-row1">
+          <div class="logo-text">🛍️ Marketplace</div>
+          <div class="topbar-icons"><span>🔔</span><span>🛒</span></div>
+        </div>
+        <div class="searchbar">
+          <span style="font-size:14px;color:rgba(255,255,255,0.55);">🔍</span>
+          <span class="searchbar-text">Cari burung, kandang, pakan…</span>
+        </div>
+      </div>
+      <div class="scroll-area" style="position:relative;">
+        <div style="padding:10px 0 0;">
+          <div class="chip-row">
+            <div class="chip active">Semua</div>
+            <div class="chip">Burung</div>
+            <div class="chip">Perlengkapan</div>
+            <div class="chip">Pakan</div>
+            <div class="chip">Kandang</div>
+            <div class="chip">Peternak</div>
+          </div>
+        </div>
+        <div class="section" style="padding-top:4px;padding-bottom:6px;">
+          <div class="section-header">
+            <span class="section-title">1.240 produk</span>
+            <span style="font-size:11px;color:var(--text-light);">⇅ Urutkan</span>
+          </div>
+        </div>
+        <div class="mkt-grid">
+          <div class="mkt-card">
+            <div class="mkt-img green">🐦<span class="mkt-badge bird">Burung</span><span class="mkt-fav">🤍</span></div>
+            <div class="mkt-info"><div class="mkt-name">Murai Batu Medan</div><div class="mkt-sub">📍 Medan, SU</div><div class="mkt-price">Rp 3.500.000</div></div>
+          </div>
+          <div class="mkt-card">
+            <div class="mkt-img amber">🏠<span class="mkt-badge acc">Kandang</span><span class="mkt-fav">🤍</span></div>
+            <div class="mkt-info"><div class="mkt-name">Sangkar Jati Premium</div><div class="mkt-sub">📍 Bandung, JB</div><div class="mkt-price">Rp 450.000</div></div>
+          </div>
+          <div class="mkt-card">
+            <div class="mkt-img amber">🦜<span class="mkt-badge bird">Burung</span><span class="mkt-fav">❤️</span></div>
+            <div class="mkt-info"><div class="mkt-name">Kenari F1 Juara</div><div class="mkt-sub">📍 Surabaya, JT</div><div class="mkt-price">Rp 850.000</div></div>
+          </div>
+          <div class="mkt-card">
+            <div class="mkt-img green">🌾<span class="mkt-badge acc">Pakan</span><span class="mkt-fav">🤍</span></div>
+            <div class="mkt-info"><div class="mkt-name">Jangkrik Kering 1kg</div><div class="mkt-sub">📍 Online</div><div class="mkt-price">Rp 45.000</div></div>
+          </div>
+          <div class="mkt-card">
+            <div class="mkt-img green">🦚<span class="mkt-badge sold">Terjual</span><span class="mkt-fav">🤍</span></div>
+            <div class="mkt-info"><div class="mkt-name">Kacer Lokal Gacor</div><div class="mkt-sub">📍 Jakarta, JK</div><div class="mkt-price">Rp 650.000</div></div>
+          </div>
+          <div class="mkt-card">
+            <div class="mkt-img amber">💊<span class="mkt-badge acc">Suplemen</span><span class="mkt-fav">🤍</span></div>
+            <div class="mkt-info"><div class="mkt-name">Vitamin Burung Kicau</div><div class="mkt-sub">📍 Online</div><div class="mkt-price">Rp 35.000</div></div>
+          </div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+      <!-- FAB Jual -->
+      <div class="fab" onclick="show('jual')">
+        <span style="font-size:16px;">➕</span> Jual Sekarang
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div></div>
+        <div class="nav-item" onclick="show('lomba')"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div></div>
+        <div class="nav-item active" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div><div class="nav-dot"></div></div>
+        <div class="nav-item" onclick="show('vet')"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div></div>
+        <div class="nav-item" onclick="show('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
+      </div>
+    </div>
+
+    <!-- FORM JUAL (dari FAB) -->
+    <div id="s-jual" style="display:none;">
+      <div class="topbar" style="padding-bottom:12px;">
+        <div class="topbar-row1">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;color:rgba(255,255,255,0.8);cursor:pointer;" onclick="show('market')">‹</span>
+            <div style="font-size:16px;font-weight:500;color:#fff;">Pasang Iklan</div>
+          </div>
+          <div class="topbar-icons"><span>❔</span></div>
+        </div>
+      </div>
+      <div class="scroll-area" style="background:var(--n60b);">
+        <div style="padding:14px 14px 0;display:flex;flex-direction:column;gap:12px;">
+          <div style="background:#fff;border-radius:14px;border:1px dashed var(--g30l);padding:20px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div style="font-size:32px;">📷</div>
+            <div style="font-size:13px;font-weight:500;color:var(--text-dark);">Tambah Foto Burung</div>
+            <div style="font-size:11px;color:var(--text-light);">Maks. 5 foto · JPG, PNG</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text-mid);margin-bottom:5px;font-weight:500;">Nama Burung / Produk</div>
+            <div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:13px;color:var(--text-light);">Mis. Murai Batu Medan Gacor</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <div style="flex:1;">
+              <div style="font-size:11px;color:var(--text-mid);margin-bottom:5px;font-weight:500;">Kategori</div>
+              <div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:13px;color:var(--text-light);display:flex;justify-content:space-between;">Pilih ▾</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:11px;color:var(--text-mid);margin-bottom:5px;font-weight:500;">Kondisi</div>
+              <div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:13px;color:var(--text-light);display:flex;justify-content:space-between;">Pilih ▾</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text-mid);margin-bottom:5px;font-weight:500;">Harga (Rp)</div>
+            <div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:13px;color:var(--text-light);">0</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text-mid);margin-bottom:5px;font-weight:500;">Deskripsi</div>
+            <div style="background:#fff;border:0.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:13px;color:var(--text-light);min-height:72px;">Ceritakan keunggulan burung kamu…</div>
+          </div>
+          <div style="background:var(--g30b);color:#fff;padding:14px;border-radius:12px;text-align:center;font-size:14px;font-weight:500;">Pasang Iklan Gratis</div>
+          <div style="height:8px;"></div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div></div>
+        <div class="nav-item" onclick="show('lomba')"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div></div>
+        <div class="nav-item active" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div><div class="nav-dot"></div></div>
+        <div class="nav-item" onclick="show('vet')"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div></div>
+        <div class="nav-item" onclick="show('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
+      </div>
+    </div>
+
+    <!-- LOMBA -->
+    <div id="s-lomba" style="display:none;">
+      <div class="topbar" style="padding-bottom:12px;">
+        <div class="topbar-row1">
+          <div style="font-size:16px;font-weight:500;color:#fff;">Lomba & Kontes</div>
+          <div class="topbar-icons"><span>🔔</span></div>
+        </div>
+      </div>
+      <div class="scroll-area" style="background:var(--n60b);">
+        <div style="padding:12px 14px 4px;"><div style="display:flex;gap:6px;">
+          <div style="background:var(--g30b);color:#fff;font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;">Semua</div>
+          <div style="background:#fff;color:var(--text-mid);font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;border:0.5px solid var(--border);">Dibuka</div>
+          <div style="background:#fff;color:var(--text-mid);font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;border:0.5px solid var(--border);">Segera</div>
+          <div style="background:#fff;color:var(--text-mid);font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;border:0.5px solid var(--border);">Selesai</div>
+        </div></div>
+        <div style="padding:10px 14px;display:flex;flex-direction:column;gap:10px;">
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+              <div style="flex:1;"><div style="font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:4px;">🏆 Kicau Mania Cup 2025</div><div style="font-size:11px;color:var(--text-light);margin-bottom:2px;">📅 20 Mei 2025 · Surabaya</div><div style="font-size:11px;color:var(--text-light);">🐦 Murai Batu, Kacer, Kenari</div></div>
+              <div style="background:var(--g30ll);color:var(--g30b);font-size:9px;padding:3px 8px;border-radius:20px;font-weight:500;flex-shrink:0;">Dibuka</div>
+            </div>
+            <div style="border-top:0.5px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:15px;font-weight:500;color:var(--a10d);">Rp 50.000.000</div>
+              <div style="background:var(--a10);color:#fff;font-size:11px;padding:7px 16px;border-radius:20px;font-weight:500;">Daftar</div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+              <div style="flex:1;"><div style="font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:4px;">🎵 Festival Kicau Nusantara</div><div style="font-size:11px;color:var(--text-light);margin-bottom:2px;">📅 15 Juni 2025 · Jakarta</div><div style="font-size:11px;color:var(--text-light);">🐦 Semua kategori</div></div>
+              <div style="background:var(--g30ll);color:var(--g30b);font-size:9px;padding:3px 8px;border-radius:20px;font-weight:500;flex-shrink:0;">Dibuka</div>
+            </div>
+            <div style="border-top:0.5px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:15px;font-weight:500;color:var(--a10d);">Rp 80.000.000</div>
+              <div style="background:var(--a10);color:#fff;font-size:11px;padding:7px 16px;border-radius:20px;font-weight:500;">Daftar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div></div>
+        <div class="nav-item active"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div><div class="nav-dot"></div></div>
+        <div class="nav-item" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div></div>
+        <div class="nav-item" onclick="show('vet')"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div></div>
+        <div class="nav-item" onclick="show('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
+      </div>
+    </div>
+
+    <!-- VET -->
+    <div id="s-vet" style="display:none;">
+      <div class="topbar" style="padding-bottom:12px;">
+        <div class="topbar-row1">
+          <div style="font-size:16px;font-weight:500;color:#fff;">Dokter Burung</div>
+          <div class="topbar-icons"><span>🔔</span></div>
+        </div>
+      </div>
+      <div class="scroll-area" style="background:var(--n60b);">
+        <div style="padding:12px 14px 0;">
+          <div style="background:#fff;border-radius:10px;border:0.5px solid var(--border);padding:9px 12px;display:flex;align-items:center;gap:8px;margin-bottom:12px;"><span style="font-size:14px;color:var(--text-light);">🔍</span><span style="font-size:13px;color:var(--text-light);">Cari dokter atau spesialisasi…</span></div>
+          <div style="display:flex;gap:6px;margin-bottom:12px;">
+            <div style="background:var(--g30b);color:#fff;font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;">Semua</div>
+            <div style="background:#fff;color:var(--text-mid);font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;border:0.5px solid var(--border);">Online</div>
+            <div style="background:#fff;color:var(--text-mid);font-size:10px;padding:5px 12px;border-radius:20px;font-weight:500;border:0.5px solid var(--border);">Rating ★</div>
+          </div>
+        </div>
+        <div style="padding:0 14px;display:flex;flex-direction:column;gap:10px;">
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);padding:12px;display:flex;gap:12px;align-items:center;">
+            <div style="width:50px;height:50px;border-radius:50%;background:var(--g30ll);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👨‍⚕️</div>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--text-dark);">drh. Budi Santoso</div><div style="font-size:11px;color:var(--text-light);margin-bottom:3px;">Spesialis Kicauan · 10 thn</div><div style="font-size:10px;color:var(--a10);">★★★★★ 4.9 (128)</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><div style="background:var(--g30ll);color:var(--g30b);font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;">● Online</div><div style="background:var(--g30b);color:#fff;font-size:10px;padding:5px 12px;border-radius:20px;">Chat</div></div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);padding:12px;display:flex;gap:12px;align-items:center;">
+            <div style="width:50px;height:50px;border-radius:50%;background:var(--a10ll);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👩‍⚕️</div>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--text-dark);">drh. Sari Dewi</div><div style="font-size:11px;color:var(--text-light);margin-bottom:3px;">Penyakit & Infeksi · 7 thn</div><div style="font-size:10px;color:var(--a10);">★★★★☆ 4.7 (94)</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><div style="background:#F0F0EE;color:#8A9590;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;">Sibuk</div><div style="background:var(--g30b);color:#fff;font-size:10px;padding:5px 12px;border-radius:20px;">Jadwal</div></div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);padding:12px;display:flex;gap:12px;align-items:center;">
+            <div style="width:50px;height:50px;border-radius:50%;background:var(--g30ll);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👨‍⚕️</div>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--text-dark);">drh. Agus Wibowo</div><div style="font-size:11px;color:var(--text-light);margin-bottom:3px;">Nutrisi & Pakan · 12 thn</div><div style="font-size:10px;color:var(--a10);">★★★★★ 4.8 (207)</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><div style="background:var(--g30ll);color:var(--g30b);font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500;">● Online</div><div style="background:var(--g30b);color:#fff;font-size:10px;padding:5px 12px;border-radius:20px;">Chat</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div></div>
+        <div class="nav-item" onclick="show('lomba')"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div></div>
+        <div class="nav-item" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div></div>
+        <div class="nav-item active"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div><div class="nav-dot"></div></div>
+        <div class="nav-item" onclick="show('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
+      </div>
+    </div>
+
+    <!-- PROFIL -->
+    <div id="s-profil" style="display:none;">
+      <div class="topbar" style="padding-bottom:16px;">
+        <div class="topbar-row1">
+          <div style="font-size:16px;font-weight:500;color:#fff;">Profil Saya</div>
+          <div class="topbar-icons"><span>⚙️</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:4px;">
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:24px;">👤</div>
+          <div><div style="font-size:16px;font-weight:500;color:#fff;">Budi Santoso</div><div style="font-size:11px;color:rgba(255,255,255,0.6);">Kicau Mania · Peternak</div></div>
+        </div>
+        <div style="display:flex;gap:0;margin-top:14px;background:rgba(255,255,255,0.1);border-radius:12px;padding:10px 0;text-align:center;">
+          <div style="flex:1;border-right:1px solid rgba(255,255,255,0.15);"><div style="font-size:16px;font-weight:500;color:#fff;">12</div><div style="font-size:10px;color:rgba(255,255,255,0.55);">Listing</div></div>
+          <div style="flex:1;border-right:1px solid rgba(255,255,255,0.15);"><div style="font-size:16px;font-weight:500;color:#fff;">5</div><div style="font-size:10px;color:rgba(255,255,255,0.55);">Lomba</div></div>
+          <div style="flex:1;"><div style="font-size:16px;font-weight:500;color:#fff;">4.9</div><div style="font-size:10px;color:rgba(255,255,255,0.55);">Rating</div></div>
+        </div>
+      </div>
+      <div class="scroll-area" style="background:var(--n60b);">
+        <div style="padding:14px;display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:8px;">🏆 Burung Andalan</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:10px;"><div style="font-size:26px;">🦜</div><div style="flex:1;"><div style="font-size:12px;font-weight:500;color:var(--text-dark);">Jokowi — Cucak Rowo</div><div style="font-size:10px;color:var(--text-light);margin-top:2px;">Juara 1 · Piala Gubernur 2024</div></div><div style="background:var(--a10ll);color:var(--a10d);font-size:9px;padding:3px 7px;border-radius:20px;font-weight:500;">Juara 1</div></div>
+              <div style="background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:10px;"><div style="font-size:26px;">🐦</div><div style="flex:1;"><div style="font-size:12px;font-weight:500;color:var(--text-dark);">Sultan — Murai Batu</div><div style="font-size:10px;color:var(--text-light);margin-top:2px;">Juara 2 · Kicau Fest Jawa 2024</div></div><div style="background:var(--g30ll);color:var(--g30b);font-size:9px;padding:3px 7px;border-radius:20px;font-weight:500;">Juara 2</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:8px;">🎖 Sertifikat & Prestasi</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:8px;background:var(--a10ll);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🥇</div><div style="flex:1;"><div style="font-size:12px;font-weight:500;color:var(--text-dark);">Piala Gubernur Jabar</div><div style="font-size:10px;color:var(--text-light);margin-top:2px;">Kelas Cucak Rowo Dewasa · Juara 1</div></div><div style="font-size:10px;color:var(--text-light);">2024</div></div>
+              <div style="background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:8px;background:var(--g30ll);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🥉</div><div style="flex:1;"><div style="font-size:12px;font-weight:500;color:var(--text-dark);">Kicau Nusantara Cup</div><div style="font-size:10px;color:var(--text-light);margin-top:2px;">Kelas Murai Batu SF · Juara 3</div></div><div style="font-size:10px;color:var(--text-light);">2023</div></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:0.5px solid var(--border);overflow:hidden;">
+            <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid var(--border);"><div style="width:32px;height:32px;border-radius:8px;background:var(--g30ll);display:flex;align-items:center;justify-content:center;font-size:15px;">📋</div><div style="flex:1;font-size:13px;color:var(--text-dark);">Iklan Saya</div><span style="color:var(--text-light);font-size:14px;">›</span></div>
+            <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid var(--border);"><div style="width:32px;height:32px;border-radius:8px;background:var(--a10ll);display:flex;align-items:center;justify-content:center;font-size:15px;">🏆</div><div style="flex:1;font-size:13px;color:var(--text-dark);">Riwayat Lomba</div><span style="color:var(--text-light);font-size:14px;">›</span></div>
+            <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;"><div style="width:32px;height:32px;border-radius:8px;background:var(--g30ll);display:flex;align-items:center;justify-content:center;font-size:15px;">⚙️</div><div style="flex:1;font-size:13px;color:var(--text-dark);">Pengaturan Akun</div><span style="color:var(--text-light);font-size:14px;">›</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="show('home')"><div class="nav-icon">🏠</div><div class="nav-label">Beranda</div></div>
+        <div class="nav-item" onclick="show('lomba')"><div class="nav-icon">🏆</div><div class="nav-label">Lomba</div></div>
+        <div class="nav-item" onclick="show('market')"><div class="nav-icon">🛍️</div><div class="nav-label">Market</div></div>
+        <div class="nav-item" onclick="show('vet')"><div class="nav-icon">🩺</div><div class="nav-label">Dokter</div></div>
+        <div class="nav-item active"><div class="nav-icon">👤</div><div class="nav-label">Profil</div><div class="nav-dot"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function show(name) {
+  ['home','market','jual','lomba','vet','profil'].forEach(s => {
+    const el = document.getElementById('s-' + s);
+    if (el) el.style.display = s === name ? 'block' : 'none';
+  });
+  const btnLabels = { home:'Home', market:'Market', lomba:'Lomba', vet:'Dokter', profil:'Profil' };
+  document.querySelectorAll('.screen-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === (btnLabels[name] || ''));
+  });
+}
+</script>

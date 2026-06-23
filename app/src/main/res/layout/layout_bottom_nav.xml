@@ -11,28 +11,32 @@
 
     <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beranda" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <TextView android:id="@+id/navHomeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beranda" android:fontFamily="@font/poppins_bold" android:textColor="@color/sage_dark" android:textSize="10sp"/>
+        <View android:id="@+id/navHomeDot" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark" android:visibility="visible"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/navLomba" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏆" android:textSize="20sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <TextView android:id="@+id/navLombaText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lomba" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <View android:id="@+id/navLombaDot" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark" android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/navMarket" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛍️" android:textSize="20sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Market" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <TextView android:id="@+id/navMarketText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Market" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <View android:id="@+id/navMarketDot" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark" android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/navVet" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🩺" android:textSize="20sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dokter" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <TextView android:id="@+id/navVetText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dokter" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <View android:id="@+id/navVetDot" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark" android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/navProfil" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profil" android:fontFamily="@font/poppins_bold" android:textColor="@color/sage_dark" android:textSize="10sp"/>
-        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark"/>
+        <TextView android:id="@+id/navProfilText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profil" android:fontFamily="@font/poppins" android:textColor="@color/text_light" android:textSize="10sp"/>
+        <View android:id="@+id/navProfilDot" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/sage_dark" android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

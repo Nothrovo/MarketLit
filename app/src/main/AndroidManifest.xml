@@ -39,8 +39,20 @@
         <activity android:name=".DetailLombaActivity" />
         <activity android:name=".ProfilActivity" />
 
+        <!-- Activity Dokter Burung -->
+        <activity android:name=".ChatDokterActivity" />
+        <activity android:name=".JadwalDokterActivity" />
+        <activity android:name=".PengaturanActivity" />
+        <activity android:name=".RiwayatActivity" />
+
         <!-- Perhatikan ini, karena dia ada di dalam folder 'ui', kita tambahkan '.ui' -->
         <activity android:name=".ui.DetailBurungActivity" />
+
+        <!-- Keranjang Belanja -->
+        <activity android:name=".KeranjangActivity" />
+        
+        <!-- Profil Detail Peternak -->
+        <activity android:name=".DetailPeternakActivity" />
 
     </application>
 

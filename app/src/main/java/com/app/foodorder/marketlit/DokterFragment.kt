@@ -1,6 +1,7 @@
 // DokterFragment.kt
 package com.app.foodorder.marketlit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,10 +41,23 @@ class DokterFragment : Fragment() {
     private fun setupRecyclerView() {
         dokterAdapter = DokterAdapter(
             onChatClick = { dokter ->
-                // TODO: buka chat dengan dokter
+                val intent = Intent(requireContext(), ChatDokterActivity::class.java).apply {
+                    putExtra("DOKTER_NAMA",      dokter.nama)
+                    putExtra("DOKTER_SPESIALIS", dokter.spesialis)
+                    putExtra("DOKTER_STATUS",    dokter.status.name)
+                    putExtra("DOKTER_EMOJI",     dokter.avatarEmoji)
+                }
+                startActivity(intent)
             },
             onJadwalClick = { dokter ->
-                // TODO: buka halaman jadwal konsultasi
+                val intent = Intent(requireContext(), JadwalDokterActivity::class.java).apply {
+                    putExtra("DOKTER_NAMA",      dokter.nama)
+                    putExtra("DOKTER_SPESIALIS", dokter.spesialis)
+                    putExtra("DOKTER_STATUS",    dokter.status.name)
+                    putExtra("DOKTER_EMOJI",     dokter.avatarEmoji)
+                    putExtra("DOKTER_RATING",    dokter.rating)
+                }
+                startActivity(intent)
             }
         )
 

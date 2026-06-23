@@ -7,13 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
 
         val btnMulai = findViewById<Button>(R.id.btn_mulai)
         btnMulai.setOnClickListener {
-            // Pindah dari Landing ke Dashboard (MainActivity)
-            val intent = Intent(this, MainActivity::class.java)
+            // Pindah dari Landing ke LoginEmailActivity
+            val intent = Intent(this, LoginEmailActivity::class.java)
             startActivity(intent)
             finish() // Biar kalau di-back gak balik ke Landing lagi
         }
