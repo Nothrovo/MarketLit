@@ -8,12 +8,13 @@ data class BurungItem(
     val jenis: String,
     val harga: Long,
     val lokasi: String,
-    val kondisi: String,      // "Sehat", "Gacor", "Siap Lomba", dll
+    val kondisi: String,
     val penjual: String,
     val ratingPenjual: Float,
     val deskripsi: String,
-    val emojiGambar: String,  // placeholder emoji sampai ada gambar asli
+    val emojiGambar: String,
     val bgAmber: Boolean = false,
     val isFeatured: Boolean = false,
-    val stokTersedia: Boolean = true
+    val stokTersedia: Boolean = true,
+    val penjualId: Int = 0
 ) : Serializable

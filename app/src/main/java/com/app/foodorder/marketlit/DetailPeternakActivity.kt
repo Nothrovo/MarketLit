@@ -9,19 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.foodorder.marketlit.adapter.BurungMarketAdapter
+import com.app.foodorder.marketlit.db.MarketLitRepository
 import com.app.foodorder.marketlit.model.Breeder
-import com.app.foodorder.marketlit.model.BurungItem
+import com.app.foodorder.marketlit.ui.MarketplaceFragment
 
 class DetailPeternakActivity : AppCompatActivity() {
+
+    private lateinit var repository: MarketLitRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_peternak)
 
-        // Read Breeder extra
+        repository = MarketLitRepository(this)
+
         val breeder = intent.getSerializableExtra("EXTRA_BREEDER") as? Breeder ?: return
 
-        // Bind Views
         val tvEmoji: TextView = findViewById(R.id.tvDetailBreederEmoji)
         val tvName: TextView = findViewById(R.id.tvDetailBreederName)
         val tvFarm: TextView = findViewById(R.id.tvDetailBreederFarm)
@@ -36,19 +39,20 @@ class DetailPeternakActivity : AppCompatActivity() {
         tvName.text = breeder.name
         tvFarm.text = breeder.farmName
         tvLocation.text = "📍 ${breeder.location}"
-        tvRating.text = breeder.rating
+        tvRating.text = "⭐ ${breeder.rating} / 5.0"
         tvDesc.text = breeder.description
 
         btnBack.setOnClickListener { finish() }
 
         btnChat.setOnClickListener {
             try {
-                val intentChat = Intent(this, Class.forName("com.app.foodorder.marketlit.ChatDokterActivity")).apply {
+                val intentChat = Intent(this, ChatDokterActivity::class.java).apply {
                     putExtra("DOKTER_NAMA", breeder.name)
                     putExtra("DOKTER_SPESIALIS", breeder.farmName)
                     putExtra("DOKTER_STATUS", "ONLINE")
                     putExtra("DOKTER_EMOJI", breeder.emoji)
                     putExtra("CHAT_TYPE", "PETERNAK")
+                    putExtra("RECEIVER_USER_ID", breeder.userId)
                 }
                 startActivity(intentChat)
             } catch (e: Exception) {
@@ -56,49 +60,11 @@ class DetailPeternakActivity : AppCompatActivity() {
             }
         }
 
-        // Filter products sold by this breeder
-        val allProducts = listOf(
-            BurungItem(
-                id = "1", nama = "Murai Batu Medan Gacor", jenis = "Burung",
-                harga = 2_500_000, lokasi = "Jakarta Selatan", kondisi = "Gacor",
-                penjual = "Pak Joko", ratingPenjual = 4.9f, bgAmber = false,
-                emojiGambar = "🐦", isFeatured = true, stokTersedia = true,
-                deskripsi = "Murai Batu Medan, gacor isian banyak, bodi panjang, ekor rapi. Siap lomba."
-            ),
-            BurungItem(
-                id = "2", nama = "Kenari Yorkshire F2", jenis = "Burung",
-                harga = 850_000, lokasi = "Bandung", kondisi = "Siap Lomba",
-                penjual = "Bu Siti", ratingPenjual = 4.7f, bgAmber = true,
-                emojiGambar = "🐤", isFeatured = false, stokTersedia = true,
-                deskripsi = "Kenari Yorkshire F2, warna kuning solid, suara panjang, jinak."
-            ),
-            BurungItem(
-                id = "5", nama = "Cucak Hijau Full Isian", jenis = "Burung",
-                harga = 1_200_000, lokasi = "Semarang", kondisi = "Full Isian",
-                penjual = "Mas Rudi", ratingPenjual = 4.6f, bgAmber = false,
-                emojiGambar = "🦜", isFeatured = true, stokTersedia = true,
-                deskripsi = "Cucak hijau full isian, isian murai, kenari, dan ciblek. Mental besi."
-            ),
-            BurungItem(
-                id = "8", nama = "Anis Kembang Siap Gacor", jenis = "Burung",
-                harga = 750_000, lokasi = "Malang", kondisi = "Gacor",
-                penjual = "Bang Deni", ratingPenjual = 4.7f, bgAmber = false,
-                emojiGambar = "🐦", isFeatured = false, stokTersedia = true,
-                deskripsi = "Anis kembang jantan dewasa, gacor isian lengkap, bodi padat."
-            ),
-            BurungItem(
-                id = "6", nama = "Perkutut Lokal Manggung", jenis = "Burung",
-                harga = 300_000, lokasi = "Solo", kondisi = "Manggung",
-                penjual = "Pak Hadi", ratingPenjual = 4.4f, bgAmber = true,
-                emojiGambar = "🕊️", isFeatured = false, stokTersedia = true,
-                deskripsi = "Perkutut lokal, sudah manggung rutin. Suara merdu."
-            )
-        )
-
-        val breederProducts = allProducts.filter { it.penjual == breeder.name }
+        val breederProducts = repository.getBurungItemsByPenjualId(breeder.userId)
 
         rvProducts.layoutManager = GridLayoutManager(this, 2)
         rvProducts.adapter = BurungMarketAdapter(breederProducts) { item ->
+            MarketplaceFragment.keranjangItems.add(item)
             Toast.makeText(this, "${item.nama} dimasukkan ke keranjang!", Toast.LENGTH_SHORT).show()
         }
     }

@@ -10,9 +10,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.foodorder.marketlit.db.MarketLitRepository
+import java.text.NumberFormat
+import java.util.Locale
 
 // ─────────────────────────────────────────────────────────
 //  Data classes
@@ -21,14 +23,19 @@ data class RiwayatLomba(
     val namaLomba: String,
     val tanggal: String,
     val lokasi: String,
-    val hasil: String          // "Peserta" | "Juara 1" | …
+    val hasil: String,
+    val id: Int = 0,
+    val userId: Int = 0,
+    val lombaId: Int = 0
 )
 
 data class RiwayatTransaksi(
     val namaItem: String,
-    val harga: String,
+    val harga: Long,
     val tanggal: String,
-    val tipe: String           // "Dibeli" | "Dijual"
+    val tipe: String,
+    val id: Int = 0,
+    val userId: Int = 0
 )
 
 // ─────────────────────────────────────────────────────────
@@ -58,7 +65,6 @@ class RiwayatLombaAdapter(
         holder.tvLokasiLomba.text  = item.lokasi
         holder.tvHasilLomba.text   = item.hasil
 
-        // Warna badge hasil
         val (bgColor, textColor) = if (item.hasil.startsWith("Juara")) {
             Pair("#FFF8E1", "#8A5220")
         } else {
@@ -81,6 +87,8 @@ class RiwayatTransaksiAdapter(
     private val items: List<RiwayatTransaksi>
 ) : RecyclerView.Adapter<RiwayatTransaksiAdapter.VH>() {
 
+    private val rupiahFormat = NumberFormat.getNumberInstance(Locale("id", "ID"))
+
     inner class VH(view: View) : RecyclerView.ViewHolder(view) {
         val tvNamaItem: TextView    = view.findViewById(R.id.tvNamaItem)
         val tvHargaItem: TextView   = view.findViewById(R.id.tvHargaItem)
@@ -97,11 +105,10 @@ class RiwayatTransaksiAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
         holder.tvNamaItem.text    = item.namaItem
-        holder.tvHargaItem.text   = item.harga
+        holder.tvHargaItem.text   = "Rp ${rupiahFormat.format(item.harga)}"
         holder.tvTanggalItem.text = item.tanggal
         holder.tvTipeItem.text    = item.tipe
 
-        // Warna badge tipe
         val (bgColor, textColor) = if (item.tipe == "Dibeli") {
             Pair("#E8F5E9", "#1B5E20")
         } else {
@@ -129,26 +136,15 @@ class RiwayatActivity : AppCompatActivity() {
     private lateinit var indicatorLomba: View
     private lateinit var indicatorTransaksi: View
     private lateinit var btnBackRiwayat: Button
-
-    // Dummy data lomba
-    private val lombaData = listOf(
-        RiwayatLomba("Kicau Mania Cup 2025", "10 Mei 2025", "Bandung, Jabar", "Peserta"),
-        RiwayatLomba("Festival Kicau Nusantara", "22 Feb 2025", "Surabaya, Jatim", "Peserta"),
-        RiwayatLomba("Piala Gubernur 2024", "14 Agt 2024", "Jakarta Pusat", "Juara 1")
-    )
-
-    // Dummy data transaksi
-    private val transaksiData = listOf(
-        RiwayatTransaksi("Murai Batu Medan", "Rp 2.500.000", "18 Jun 2025", "Dibeli"),
-        RiwayatTransaksi("Sangkar Premium Bambu", "Rp 450.000", "03 Mei 2025", "Dijual"),
-        RiwayatTransaksi("Kenari F1 Betina", "Rp 850.000", "28 Apr 2025", "Dibeli")
-    )
+    private lateinit var repository: MarketLitRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_riwayat)
 
-        // Bind views
+        repository = MarketLitRepository(this)
+        val userId = getSharedPreferences("USER_SESSION", MODE_PRIVATE).getInt("USER_ID", 1)
+
         rvLomba           = findViewById(R.id.rvRiwayatLomba)
         rvTransaksi       = findViewById(R.id.rvRiwayatTransaksi)
         tvTabLomba        = findViewById(R.id.tvTabLomba)
@@ -157,52 +153,45 @@ class RiwayatActivity : AppCompatActivity() {
         indicatorTransaksi= findViewById(R.id.indicatorTransaksi)
         btnBackRiwayat    = findViewById(R.id.btnBackRiwayat)
 
-        // Setup RecyclerViews
+        val lombaData = repository.getRiwayatLombaByUserId(userId)
+        val transaksiData = repository.getRiwayatTransaksiByUserId(userId)
+
         rvLomba.layoutManager = LinearLayoutManager(this)
         rvLomba.adapter = RiwayatLombaAdapter(lombaData)
 
         rvTransaksi.layoutManager = LinearLayoutManager(this)
         rvTransaksi.adapter = RiwayatTransaksiAdapter(transaksiData)
 
-        // Tab click listeners
         tvTabLomba.setOnClickListener { showTab("lomba") }
         tvTabTransaksi.setOnClickListener { showTab("transaksi") }
 
-        // Tombol back
         btnBackRiwayat.setOnClickListener { finish() }
 
-        // Tentukan tab awal berdasarkan intent extra
         val tab = intent.getStringExtra("TAB") ?: "lomba"
         showTab(tab)
     }
 
     private fun showTab(tab: String) {
         if (tab == "lomba") {
-            // Aktifkan tab Lomba
             tvTabLomba.setTypeface(null, android.graphics.Typeface.BOLD)
             tvTabLomba.setTextColor(Color.parseColor("#1B5E20"))
             indicatorLomba.visibility = View.VISIBLE
 
-            // Non-aktifkan tab Transaksi
             tvTabTransaksi.setTypeface(null, android.graphics.Typeface.NORMAL)
             tvTabTransaksi.setTextColor(Color.parseColor("#9E9E9E"))
             indicatorTransaksi.visibility = View.INVISIBLE
 
-            // Tampilkan RecyclerView Lomba
             rvLomba.visibility = View.VISIBLE
             rvTransaksi.visibility = View.GONE
         } else {
-            // Aktifkan tab Transaksi
             tvTabTransaksi.setTypeface(null, android.graphics.Typeface.BOLD)
             tvTabTransaksi.setTextColor(Color.parseColor("#1B5E20"))
             indicatorTransaksi.visibility = View.VISIBLE
 
-            // Non-aktifkan tab Lomba
             tvTabLomba.setTypeface(null, android.graphics.Typeface.NORMAL)
             tvTabLomba.setTextColor(Color.parseColor("#9E9E9E"))
             indicatorLomba.visibility = View.INVISIBLE
 
-            // Tampilkan RecyclerView Transaksi
             rvTransaksi.visibility = View.VISIBLE
             rvLomba.visibility = View.GONE
         }

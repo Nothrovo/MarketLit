@@ -36,7 +36,7 @@ class PeternakAdapter(
         holder.tvName.text = item.name
         holder.tvFarm.text = item.farmName
         holder.tvLocation.text = "📍 ${item.location}"
-        holder.tvRating.text = item.rating
+        holder.tvRating.text = "⭐ ${item.rating} / 5.0"
 
         holder.btnChat.setOnClickListener { onChatClick(item) }
         holder.itemView.setOnClickListener { onItemClick(item) }

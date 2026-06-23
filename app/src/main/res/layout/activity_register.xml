@@ -68,6 +68,7 @@
                 app:boxBackgroundColor="@color/bg_cream"
                 android:layout_marginBottom="12dp">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
@@ -82,6 +83,7 @@
                 app:boxBackgroundColor="@color/bg_cream"
                 android:layout_marginBottom="12dp">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
@@ -96,6 +98,7 @@
                 app:boxBackgroundColor="@color/bg_cream"
                 android:layout_marginBottom="12dp">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"

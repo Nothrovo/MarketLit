@@ -9,9 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.foodorder.marketlit.db.MarketLitRepository
 import com.app.foodorder.marketlit.model.BurungItem
 import com.app.foodorder.marketlit.ui.MarketplaceFragment
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class KeranjangActivity : AppCompatActivity() {
@@ -22,6 +25,7 @@ class KeranjangActivity : AppCompatActivity() {
     private lateinit var btnBack: TextView
     private lateinit var layoutKosong: View
     private lateinit var keranjangAdapter: KeranjangAdapter
+    private lateinit var repository: MarketLitRepository
 
     private val rupiahFormat = NumberFormat.getNumberInstance(Locale("id", "ID"))
 
@@ -29,19 +33,18 @@ class KeranjangActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keranjang)
 
+        repository = MarketLitRepository(this)
+
         rvKeranjang  = findViewById(R.id.rvKeranjang)
         tvTotalHarga = findViewById(R.id.tvTotalHarga)
         btnCheckout  = findViewById(R.id.btnCheckout)
         btnBack      = findViewById(R.id.btnBackKeranjang)
         layoutKosong = findViewById(R.id.layoutKosong)
 
-        // Tampilkan warna status bar sesuai topbar
         window.statusBarColor = android.graphics.Color.parseColor("#3E5C44")
 
-        // Back button
         btnBack.setOnClickListener { finish() }
 
-        // Setup adapter
         keranjangAdapter = KeranjangAdapter(
             MarketplaceFragment.keranjangItems,
             onHapus = { item ->
@@ -52,12 +55,24 @@ class KeranjangActivity : AppCompatActivity() {
         rvKeranjang.layoutManager = LinearLayoutManager(this)
         rvKeranjang.adapter = keranjangAdapter
 
-        // Checkout
         btnCheckout.setOnClickListener {
             if (MarketplaceFragment.keranjangItems.isEmpty()) {
                 Toast.makeText(this, "Keranjang masih kosong!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "✅ Pesanan berhasil dibuat! Terima kasih.", Toast.LENGTH_LONG).show()
+                val userId = getSharedPreferences("USER_SESSION", MODE_PRIVATE).getInt("USER_ID", 1)
+                val tanggal = SimpleDateFormat("dd MMM yyyy", Locale("id", "ID")).format(Date())
+
+                for (item in MarketplaceFragment.keranjangItems) {
+                    repository.insertRiwayatTransaksi(
+                        userId = userId,
+                        namaItem = item.nama,
+                        harga = item.harga,
+                        tanggal = tanggal,
+                        tipe = "Dibeli"
+                    )
+                }
+
+                Toast.makeText(this, "Pesanan berhasil dibuat! Terima kasih.", Toast.LENGTH_LONG).show()
                 MarketplaceFragment.keranjangItems.clear()
                 refreshUI()
             }
@@ -81,7 +96,6 @@ class KeranjangActivity : AppCompatActivity() {
     }
 }
 
-// ── Adapter keranjang inline ──────────────────────────────────────────────────
 class KeranjangAdapter(
     private val items: MutableList<BurungItem>,
     private val onHapus: (BurungItem) -> Unit
@@ -110,7 +124,7 @@ class KeranjangAdapter(
         holder.tvEmoji.text   = item.emojiGambar
         holder.tvNama.text    = item.nama
         holder.tvHarga.text   = "Rp ${rupiahFormat.format(item.harga)}"
-        holder.tvPenjual.text = "📦 ${item.penjual} · ${item.lokasi}"
+        holder.tvPenjual.text = "${item.penjual} · ${item.lokasi}"
         holder.btnHapus.setOnClickListener { onHapus(item) }
     }
 }

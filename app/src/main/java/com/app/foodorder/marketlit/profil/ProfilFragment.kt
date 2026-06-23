@@ -1,7 +1,6 @@
 package com.app.foodorder.marketlit.profil
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +14,10 @@ import com.app.foodorder.marketlit.LandingActivity
 import com.app.foodorder.marketlit.PengaturanActivity
 import com.app.foodorder.marketlit.R
 import com.app.foodorder.marketlit.RiwayatActivity
+import com.app.foodorder.marketlit.db.MarketLitRepository
 
 class ProfilFragment : Fragment() {
 
-    // ==========================================
-    // Daftar menu profil — tambah/kurangi di sini
-    // ==========================================
     private val menuList = listOf(
         MenuProfilItem(id = "iklan",      icon = "📋", title = "Iklan Saya"),
         MenuProfilItem(id = "lomba",      icon = "🏆", title = "Riwayat Lomba"),
@@ -46,9 +43,22 @@ class ProfilFragment : Fragment() {
     }
 
     private fun loadUserName(view: View) {
-        val prefs: SharedPreferences = requireContext()
-            .getSharedPreferences("USER_PROFILE", android.content.Context.MODE_PRIVATE)
-        val nama = prefs.getString("USER_NAME", "Pengguna MarketLit") ?: "Pengguna MarketLit"
+        val sessionPrefs = requireContext()
+            .getSharedPreferences("USER_SESSION", android.content.Context.MODE_PRIVATE)
+        val userId = sessionPrefs.getInt("USER_ID", 0)
+
+        var nama = "Pengguna MarketLit"
+        if (userId > 0) {
+            val repository = MarketLitRepository(requireContext())
+            val user = repository.getUserById(userId)
+            if (user != null) {
+                nama = user.nama
+            }
+        } else {
+            val prefs = requireContext()
+                .getSharedPreferences("USER_PROFILE", android.content.Context.MODE_PRIVATE)
+            nama = prefs.getString("USER_NAME", nama) ?: nama
+        }
         view.findViewById<TextView>(R.id.tvNamaPengguna)?.text = nama
     }
 
@@ -62,15 +72,11 @@ class ProfilFragment : Fragment() {
         rvMenu.layoutManager = LinearLayoutManager(requireContext())
         rvMenu.adapter = adapter
 
-        // Divider antar item — alternatif dari viewDivider manual
         rvMenu.addItemDecoration(
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         )
     }
 
-    // ==========================================
-    // Handler klik — mudah dikembangkan
-    // ==========================================
     private fun handleMenuClick(item: MenuProfilItem) {
         when (item.id) {
             "iklan" -> {
@@ -92,6 +98,12 @@ class ProfilFragment : Fragment() {
                     .setTitle("Log Out")
                     .setMessage("Apakah Anda yakin ingin keluar?")
                     .setPositiveButton("Ya") { _, _ ->
+                        requireContext().getSharedPreferences("USER_SESSION", android.content.Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("isLoggedIn", false)
+                            .remove("USER_ID")
+                            .apply()
+
                         val intent = Intent(requireContext(), LandingActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
