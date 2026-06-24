@@ -3,7 +3,12 @@
   <component name="PlanningModeManager">
     <option name="approvalStates">
       <map>
+<<<<<<< HEAD
         <entry key="20260429-233000-d0cb3d6e-c900-47e0-9817-1c2dc1002111" value="true" />
+=======
+        <entry key="20260624-160739-af28cc5e-965c-49a9-bf98-5a25e4db350e" value="true" />
+        <entry key="20260624-162853-018f0bd6-0e9b-4f55-b698-dd127d7717a1" value="true" />
+>>>>>>> d171d60 (chores: feat/event)
       </map>
     </option>
   </component>
