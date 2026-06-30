@@ -59,19 +59,11 @@ class KeranjangActivity : AppCompatActivity() {
             if (MarketplaceFragment.keranjangItems.isEmpty()) {
                 Toast.makeText(this, "Keranjang masih kosong!", Toast.LENGTH_SHORT).show()
             } else {
-                val userId = getSharedPreferences("USER_SESSION", MODE_PRIVATE).getInt("USER_ID", 1)
-                val tanggal = SimpleDateFormat("dd MMM yyyy", Locale("id", "ID")).format(Date())
-
-                for (item in MarketplaceFragment.keranjangItems) {
-                    repository.insertRiwayatTransaksi(
-                        userId = userId,
-                        namaItem = item.nama,
-                        harga = item.harga,
-                        tanggal = tanggal,
-                        tipe = "Dibeli"
-                    )
+                val repository = com.app.foodorder.marketlit.db.MarketLitRepository(this)
+                MarketplaceFragment.keranjangItems.forEach { item ->
+                    val updatedItem = item.copy(stokTersedia = false)
+                    repository.updateBurungItem(updatedItem)
                 }
-
                 Toast.makeText(this, "Pesanan berhasil dibuat! Terima kasih.", Toast.LENGTH_LONG).show()
                 MarketplaceFragment.keranjangItems.clear()
                 refreshUI()

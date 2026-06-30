@@ -32,7 +32,14 @@ class DetailBurungActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnBeli).setOnClickListener {
-            Toast.makeText(this, "Pesanan untuk ${item?.nama} diproses!", Toast.LENGTH_SHORT).show()
+            item?.let {
+                val repository = com.app.foodorder.marketlit.db.MarketLitRepository(this)
+                val updatedItem = it.copy(stokTersedia = false)
+                repository.updateBurungItem(updatedItem)
+
+                Toast.makeText(this, "Pesanan untuk ${it.nama} diproses!", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 

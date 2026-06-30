@@ -78,7 +78,7 @@ class BurungMarketAdapter(
         // Click → Detail
         holder.itemView.setOnClickListener {
             val intent = Intent(ctx, DetailBurungActivity::class.java)
-            intent.putExtra("EXTRA_BURUNG", item)
+            intent.putExtra(DetailBurungActivity.EXTRA_BURUNG, item)
             ctx.startActivity(intent)
         }
 

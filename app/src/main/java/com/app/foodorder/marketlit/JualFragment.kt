@@ -118,30 +118,23 @@ class JualFragment : Fragment() {
     }
 
     private fun submitIklan(nama: String, harga: Long, deskripsi: String, kategori: String, kondisi: String) {
-        val prefs = requireContext().getSharedPreferences("USER_SESSION", android.content.Context.MODE_PRIVATE)
-        val userId = prefs.getInt("USER_ID", 1)
-        val nextId = repository.getNextBurungItemId()
-
-        val emojiMap = mapOf(
-            "Burung" to "🐦", "Kandang" to "🧰", "Pakan" to "🌾", "Perlengkapan" to "💊"
-        )
-
-        val item = BurungItem(
-            id = nextId,
+        val newItem = BurungItem(
+            id = repository.getNextBurungItemId(),
             nama = nama,
             jenis = kategori,
             harga = harga,
-            lokasi = "",
+            lokasi = "Lokasi Anda",
             kondisi = kondisi,
-            penjual = "",
+            penjual = "Anda",
             ratingPenjual = 0f,
             deskripsi = deskripsi,
-            emojiGambar = emojiMap[kategori] ?: "📦",
-            penjualId = userId
+            emojiGambar = "🐦",
+            stokTersedia = true,
+            penjualId = 1
         )
-        repository.insertBurungItem(item)
+        repository.insertBurungItem(newItem)
 
-        Toast.makeText(requireContext(), "Iklan berhasil dipasang!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Iklan berhasil dipasang! 🎉", Toast.LENGTH_SHORT).show()
         (activity as? MainActivity)?.loadFragment(MarketplaceFragment())
     }
 

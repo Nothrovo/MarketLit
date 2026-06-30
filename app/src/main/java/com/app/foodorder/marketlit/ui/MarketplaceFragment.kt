@@ -92,6 +92,14 @@ class MarketplaceFragment : Fragment() {
         applyFilters(etSearch.text.toString())
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (::repository.isInitialized && ::etSearch.isInitialized) {
+            allItems = repository.getAllBurungItems()
+            applyFilters(etSearch.text.toString())
+        }
+    }
+
     private fun setupTopbarActions(view: View) {
         val ivKeranjang = view.findViewById<TextView>(R.id.ivKeranjangMarket)
         ivKeranjang.setOnClickListener {
@@ -120,7 +128,8 @@ class MarketplaceFragment : Fragment() {
             override fun onResponse(call: Call<List<BurungItem>>, response: Response<List<BurungItem>>) {
                 progressBar.visibility = View.GONE
                 if (response.isSuccessful && response.body() != null) {
-                    allItems = response.body()!!
+                    val apiItems = response.body()!!
+                    allItems = repository.getAllBurungItems() + apiItems  // gabung SQLite + API
                     applyFilters(etSearch.text.toString())
                 } else {
                     Toast.makeText(requireContext(), "Gagal memuat data burung", Toast.LENGTH_SHORT).show()
@@ -231,9 +240,9 @@ class MarketplaceFragment : Fragment() {
             (rvMarket.layoutManager as? GridLayoutManager)?.spanCount = 2
 
             var result = if (activeFilter == "Semua") {
-                allItems
+                allItems.filter { it.stokTersedia }
             } else {
-                allItems.filter { it.jenis == activeFilter }
+                allItems.filter { it.jenis == activeFilter && it.stokTersedia }
             }
 
             if (query.isNotBlank()) {
