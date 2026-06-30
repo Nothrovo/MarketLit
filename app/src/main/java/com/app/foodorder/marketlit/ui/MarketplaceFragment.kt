@@ -32,6 +32,7 @@ class MarketplaceFragment : Fragment() {
 
     companion object {
         val keranjangItems = mutableListOf<BurungItem>()
+        val terjualApiIds = mutableSetOf<String>()
 
         fun newInstance(initialFilter: String = "Semua"): MarketplaceFragment {
             val fragment = MarketplaceFragment()
@@ -50,7 +51,10 @@ class MarketplaceFragment : Fragment() {
     private lateinit var repository: MarketLitRepository
 
     private var activeFilter = "Semua"
-    private var allItems: List<BurungItem> = emptyList()
+    private var sqliteItems: List<BurungItem> = emptyList()
+    private var apiItems: List<BurungItem> = emptyList()
+    private val allItems: List<BurungItem>
+        get() = sqliteItems + apiItems
     private var breedersList: List<Breeder> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +77,7 @@ class MarketplaceFragment : Fragment() {
 
         progressBar = view.findViewById(R.id.progressBar)
 
-        allItems = repository.getAllBurungItems()
+        sqliteItems = repository.getAllBurungItems()
         breedersList = repository.getAllBreeders()
 
         adapter = BurungMarketAdapter(allItems) { item ->
@@ -95,7 +99,7 @@ class MarketplaceFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (::repository.isInitialized && ::etSearch.isInitialized) {
-            allItems = repository.getAllBurungItems()
+            sqliteItems = repository.getAllBurungItems()
             applyFilters(etSearch.text.toString())
         }
     }
@@ -128,8 +132,7 @@ class MarketplaceFragment : Fragment() {
             override fun onResponse(call: Call<List<BurungItem>>, response: Response<List<BurungItem>>) {
                 progressBar.visibility = View.GONE
                 if (response.isSuccessful && response.body() != null) {
-                    val apiItems = response.body()!!
-                    allItems = repository.getAllBurungItems() + apiItems  // gabung SQLite + API
+                    apiItems = response.body()!!.map { it.copy(id = "api-${it.id}") }
                     applyFilters(etSearch.text.toString())
                 } else {
                     Toast.makeText(requireContext(), "Gagal memuat data burung", Toast.LENGTH_SHORT).show()
@@ -240,9 +243,9 @@ class MarketplaceFragment : Fragment() {
             (rvMarket.layoutManager as? GridLayoutManager)?.spanCount = 2
 
             var result = if (activeFilter == "Semua") {
-                allItems.filter { it.stokTersedia }
+                allItems.filter { it.stokTersedia && it.id !in terjualApiIds }
             } else {
-                allItems.filter { it.jenis == activeFilter && it.stokTersedia }
+                allItems.filter { it.jenis == activeFilter && it.stokTersedia && it.id !in terjualApiIds }
             }
 
             if (query.isNotBlank()) {

@@ -33,9 +33,14 @@ class DetailBurungActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnBeli).setOnClickListener {
             item?.let {
-                val repository = com.app.foodorder.marketlit.db.MarketLitRepository(this)
-                val updatedItem = it.copy(stokTersedia = false)
-                repository.updateBurungItem(updatedItem)
+                if (it.id.startsWith("api-")) {
+                    // Item dari API, tidak ada di SQLite — tandai lewat SharedPreferences atau companion object
+                    com.app.foodorder.marketlit.ui.MarketplaceFragment.terjualApiIds.add(it.id)
+                } else {
+                    val repository = com.app.foodorder.marketlit.db.MarketLitRepository(this)
+                    val updatedItem = it.copy(stokTersedia = false)
+                    repository.updateBurungItem(updatedItem)
+                }
 
                 Toast.makeText(this, "Pesanan untuk ${it.nama} diproses!", Toast.LENGTH_SHORT).show()
                 finish()
